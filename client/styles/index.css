@@ -1,0 +1,25 @@
+
+
+
+
+h1 {
+  text-align: center;
+  margin: 50px;
+  font-size: 50px;
+}
+
+ h2 {
+  margin-left: 30px;
+
+}
+
+img {
+  margin-left: 300px;
+  margin-bottom: 100px;
+  width: 50%;  
+}
+
+.slick-slider {
+ 
+ width: 100%;
+}

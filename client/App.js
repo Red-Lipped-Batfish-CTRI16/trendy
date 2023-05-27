@@ -1,9 +1,12 @@
 import React from "react";
-import CenterMode from "./containers/Carousel";
+import Carousel from "./containers/Carousel";
+
+import '../client/styles/index.css';
+
 export default function App() {
-  return <div>
-    
-    
+  return <div className="demo">
+    <img src="../image/map.png"></img>
+    <Carousel/>
     
     </div>;
 }
