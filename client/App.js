@@ -4,13 +4,16 @@ import { BrowserRouter, Route, Routes, createBrowserRouter, RouterProvider } fro
 import Main from './pages/Main'
 import Navbar from './components/Navbar'
 import Root from './pages/Root'
+import Home from './pages/Home'
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     children: [
-      { path: "/", element: <Main /> },
+      { path: "/", element: <Home /> },
+      { path: "/main", element: <Main />}
     ],
   },
 ]);
