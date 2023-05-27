@@ -1,0 +1,9 @@
+.Navbar {
+  display: flex;
+  align-items: center;
+  justify-content:space-evenly;
+}
+
+.Main {
+  margin-top: 50px;
+}
