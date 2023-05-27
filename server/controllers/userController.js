@@ -1,4 +1,4 @@
-const db = require('../models/database.mjs');
+const db = require('../models/database.js');
 
 const userController = {};
 
@@ -6,15 +6,16 @@ userController.getUsers = (req, res, next) => {
   try {
     const getUsers = 'SELECT * from users';
     db.query(getUsers).then((users) => {
-      console.log(users);
+      console.log(users.rows);
+      res.locals.users = users.rows;
+      return next();
     });
-    return next();
   } catch (error) {
     return next(error);
   }
 };
 
-userController.insertUser = (req, res, next) => {
+userController.addUser = (req, res, next) => {
   try {
     const { username, location } = req.body;
     const values = [username, location];
@@ -22,11 +23,11 @@ userController.insertUser = (req, res, next) => {
     db.query(insertUser, values).then((user) => {
       console.log(user);
       res.locals.user = user;
+      return next();
     });
-    return next();
   } catch (error) {
     return next(error);
   }
 };
 
-module.exports = trendyController;
+module.exports = userController;
