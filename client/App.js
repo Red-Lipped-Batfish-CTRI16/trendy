@@ -1,12 +1,29 @@
 import React from "react";
-import Carousel from "./containers/Carousel";
+
 
 import '../client/styles/index.css';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Routes, createBrowserRouter, RouterProvider } from "react-router-dom"
+import Main from './pages/Main'
+import Navbar from './components/Navbar'
+import Root from './pages/Root'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      { path: "/", element: <Main /> },
+    ],
+  },
+]);
 
 export default function App() {
-  return <div className="demo">
-    <img src="../image/map.png"></img>
-    <Carousel/>
-    
-    </div>;
+  return <RouterProvider router={router}>
+   
+
+  </RouterProvider>;
+  
+
 }
+
