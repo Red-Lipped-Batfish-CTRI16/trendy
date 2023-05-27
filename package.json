@@ -1,5 +1,5 @@
 {
-  "name": "React-Boilerplate",
+  "name": "trendy",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-slick": "^0.29.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
