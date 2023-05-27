@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [location, setLocation] = useState('');
   const [interest, setInterest] = useState('');
   const [radius, setRadius] = useState('');
+  const navigate = useNavigate();
   
   const handleSubmit = (event) => {
     event.preventDefault(); 
+
 
     const formData = {
       location,
@@ -14,15 +17,16 @@ export default function Navbar() {
       radius,
     };
 
-    fetch('/api/', {
+    fetch('/api/search', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => {
-
+      .then((response) => response.json())
+      .then((data) => {
+        navigate('/main', { state: { responseData: data } });
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -49,8 +53,8 @@ export default function Navbar() {
       </div>
       <div>
         <form onSubmit={handleSubmit}>
-          <input placeholder="Location" value={location} onChange={handleLocationChange} />
-          <input placeholder="Interest" value={interest} onChange={handleInterestChange} />
+          <input placeholder="Location" value={location} onChange={handleLocationChange} required />
+          <input placeholder="Interest" value={interest} onChange={handleInterestChange} required />
           <label>Radius:</label>
           <select id="radius" value={radius} onChange={handleRadiusChange}>
             <option value="8050">5 miles</option>
