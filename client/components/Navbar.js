@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function Navbar() {
-  const [location, setLocation] = useState('');
-  const [interest, setInterest] = useState('');
-  const [radius, setRadius] = useState('');
-  
+  const [location, setLocation] = useState("");
+  const [interest, setInterest] = useState("");
+  const [radius, setRadius] = useState("");
+
   const handleSubmit = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     const formData = {
       location,
@@ -14,18 +14,16 @@ export default function Navbar() {
       radius,
     };
 
-    fetch('/api/', {
-      method: 'GET',
+    fetch("/api/", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => {
-
-      })
+      .then((response) => {})
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
@@ -41,7 +39,6 @@ export default function Navbar() {
     setRadius(event.target.value);
   };
 
-
   return (
     <div className="Navbar">
       <div>
@@ -49,8 +46,16 @@ export default function Navbar() {
       </div>
       <div>
         <form onSubmit={handleSubmit}>
-          <input placeholder="Location" value={location} onChange={handleLocationChange} />
-          <input placeholder="Interest" value={interest} onChange={handleInterestChange} />
+          <input
+            placeholder="Location"
+            value={location}
+            onChange={handleLocationChange}
+          />
+          <input
+            placeholder="Interest"
+            value={interest}
+            onChange={handleInterestChange}
+          />
           <label>Radius:</label>
           <select id="radius" value={radius} onChange={handleRadiusChange}>
             <option value="8050">5 miles</option>
@@ -61,5 +66,5 @@ export default function Navbar() {
         </form>
       </div>
     </div>
-  )
+  );
 }
