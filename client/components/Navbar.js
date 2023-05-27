@@ -45,7 +45,7 @@ export default function Navbar() {
   return (
     <div className="Navbar">
       <div>
-        <h1>Trendy</h1>
+        
       </div>
       <div>
         <form onSubmit={handleSubmit}>
