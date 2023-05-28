@@ -1,7 +1,7 @@
 const searchController = {};
 const sdk = require("api")("@yelp-developers/v1.0#deudoolf6o9f51");
 // process.env.YELP_API;
-const data = require("./TEST_DATA");
+const data = require("./TEST_DATA"); //comment out after
 const cheerio = require("cheerio");
 
 searchController.getBuisnesses = async (req, res, next) => {
@@ -16,47 +16,89 @@ searchController.getBuisnesses = async (req, res, next) => {
   //   term: interest,
   //   radius,
   //   sort_by: "best_match",
-  //   limit: "3",
+  //   limit: "20",
   // });
 
-  res.locals.businesses = data.businesses.map((business) => {
-    const { id, name, image_url, url, categories, location } = business;
-    return {
-      id,
-      name,
-      image_url,
-      url,
-      categories,
-      location: location.display_address,
-    };
-  });
-
+  // res.locals.businesses = data.businesses.map((business) => {
+  //   const { id, name, image_url, url, categories, location } = business;
+  //   return {
+  //     id,
+  //     name,
+  //     image_url,
+  //     url,
+  //     categories,
+  //     location: location.display_address,
+  //   };
+  // });
+  res.locals.businesses = data.business;
   next();
 };
 
 searchController.getComments = async (req, res, next) => {
-  Promise.all(
-    res.locals.businesses.map((business) => fetch(business.url))
-  ).then((YELPres) => {
-    Promise.all(YELPres.map((x) => x.text())).then((html) => {
-      const collectionOfComments = [];
-      for (const pages of html) {
-        const comments = [];
-        const $ = cheerio.load(pages);
-        const $comment = $("span.raw__09f24__T4Ezm");
-        $comment.each((i, e) => {
-          comments.push($(e).text().trim());
-        });
-        console.log(comments);
-        collectionOfComments.push(comments);
-      }
-    });
-  });
-
-  next();
+  // Promise.all(
+  //   res.locals.businesses.map((business) => fetch(business.url))
+  // ).then((YELPres) => {
+  //   Promise.all(YELPres.map((x) => x.text())).then((html) => {
+  //     for (const index in html) {
+  //       const comments = [];
+  //       const $ = cheerio.load(html[index]);
+  //       const $comment = $("span.raw__09f24__T4Ezm");
+  //       $comment.each((i, e) => {
+  //         comments.push($(e).text().trim());
+  //       });
+  //       res.locals.businesses[index].comments = comments;
+  //     }
+  //     next();
+  //   });
+  // });
+  next(); /// comment out after
 };
 
+async function getRatingsHelper(business) {
+  try {
+    const data = await Promise.all(
+      business.comments.map((comment) => {
+        return fetch(
+          "https://api.api-ninjas.com/v1/sentiment?text=" + comment,
+          {
+            headers: {
+              "X-Api-Key": "MofWezqyBu8SjjAHqQVkXw==tBwSkmuPFMyyhNr8",
+            },
+          }
+        );
+      })
+    );
+    const rating = await Promise.all(data.map((rate) => rate.json()));
+    let validResponses = 0;
+    const avg =
+      rating.reduce((acc, curr) => {
+        if (curr.score !== undefined) {
+          acc += curr.score;
+          validResponses++;
+        }
+        return acc;
+      }, 0) / validResponses;
+    return Promise.resolve(avg);
+  } catch (error) {
+    return Promise.resolve("ERROR");
+  }
+}
+
 searchController.getRatings = async (req, res, next) => {
+  // const average = await Promise.all(
+  //   res.locals.businesses.map((buisiness) => {
+  //     return getRatingsHelper(buisiness);
+  //   })
+  // );
+
+  // const filterBbusinesses = [];
+  // for (const index in average) {
+  //   if (average[index] !== "ERROR") {
+  //     res.locals.businesses[index].averageScore = average[index];
+  //     filterBbusinesses.push(res.locals.businesses[index]);
+  //   }
+  // }
+  // res.locals.businesses = filterBbusinesses;
   next();
 };
 

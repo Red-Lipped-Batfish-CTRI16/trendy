@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-  const [location, setLocation] = useState('');
-  const [interest, setInterest] = useState('');
-  const [radius, setRadius] = useState('');
+  const [location, setLocation] = useState("");
+  const [interest, setInterest] = useState("");
+  const [radius, setRadius] = useState("");
   const navigate = useNavigate();
-  
-  const handleSubmit = (event) => {
-    event.preventDefault(); 
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     const formData = {
       location,
@@ -17,19 +16,19 @@ export default function Navbar() {
       radius,
     };
 
-    fetch('/api/search', {
-      method: 'GET',
+    fetch("/api/search", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((data) => {
-        navigate('/main', { state: { responseData: data } });
+        navigate("/main", { state: { responseData: data } });
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
@@ -45,16 +44,23 @@ export default function Navbar() {
     setRadius(event.target.value);
   };
 
-
   return (
     <div className="Navbar">
-      <div>
-        
-      </div>
+      <div></div>
       <div>
         <form onSubmit={handleSubmit}>
-          <input placeholder="Location" value={location} onChange={handleLocationChange} required />
-          <input placeholder="Interest" value={interest} onChange={handleInterestChange} required />
+          <input
+            placeholder="Location"
+            value={location}
+            onChange={handleLocationChange}
+            required
+          />
+          <input
+            placeholder="Interest"
+            value={interest}
+            onChange={handleInterestChange}
+            required
+          />
           <label>Radius:</label>
           <select id="radius" value={radius} onChange={handleRadiusChange}>
             <option value="8050">5 miles</option>
@@ -65,5 +71,5 @@ export default function Navbar() {
         </form>
       </div>
     </div>
-  )
+  );
 }
