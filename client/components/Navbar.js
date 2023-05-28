@@ -16,15 +16,18 @@ export default function Navbar() {
       radius,
     };
 
+    //cant pass a body into GET requests? 
+    // body: JSON.stringify(formData),
+
     fetch("/api/search", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+      }
     })
       .then((response) => response.json())
       .then((data) => {
+        
         navigate("/main", { state: { responseData: data } });
       })
       .catch((error) => {
