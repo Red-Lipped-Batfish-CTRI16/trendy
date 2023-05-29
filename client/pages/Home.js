@@ -2,7 +2,7 @@ export default function Home() {
 
   return (
     <div className="Home">
-      <h1>Input a Location and Search to view results</h1>
+      <h1>Input a Location and Interest to View Results</h1>
     </div>
   )
 } 
