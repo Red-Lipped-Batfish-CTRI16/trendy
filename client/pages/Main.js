@@ -5,18 +5,19 @@ import { useEffect, useState } from "react";
 
 export default function Main() {
   let location = useLocation();
-  const { responseData } = location.state;
+  const { responseData, userData } = location.state;
   const [cards, setCards] = useState([]); // Use state to store the cards
+
 
   useEffect(() => {
     const cardElements = responseData.map((card, index) => (
       <div key={index} className="card">
         <h1>{card.name}</h1>
-        <p>Score: {Math.round(card.averageScore * 100)}</p>
-        <p>Category: {card.categories[0].title}</p>
-        <p>Address: {card.location[0]}</p>
-        <p>{truncateLink(card.url)}</p>
         <img src={card.image_url}/>
+        <p>Score: {Math.round(card.averageScore * 100)}/100</p>
+        <p>Category: {card.categories.map(category => category.title).join(', ')}</p>
+        <p>Address: {card.location.join(', ')}</p>
+        <p>{truncateLink(card.url)}</p> 
       </div>
     ));
 
@@ -24,7 +25,7 @@ export default function Main() {
   }, [responseData]);
 
   const truncateLink = (url) => {
-    const maxLength = 30; // Maximum length of the displayed link
+    const maxLength = 40; // Maximum length of the displayed link
     if (url.length > maxLength) {
       return url.substring(0, maxLength) + "...";
     }

@@ -49,7 +49,7 @@ export default function Navbar() {
 
   return (
     <div className="Navbar">
-      <div></div>
+      <div><h1>TRENDY</h1></div>
       <div>
         <form onSubmit={handleSubmit}>
           <input
@@ -72,6 +72,9 @@ export default function Navbar() {
           </select>
           <button type="submit">Submit</button>
         </form>
+      </div>
+      <div>
+        <button onClick={() => navigate("/login")}>Login or Sign Up</button>
       </div>
     </div>
   );
