@@ -7,8 +7,4 @@ router.get('/', userController.getUsers, (req, res, next) => {
   res.json(res.locals.users);
 });
 
-router.post('/', userController.addUser, (req, res, next) => {
-  res.json(res.locals.user);
-});
-
 module.exports = router;
