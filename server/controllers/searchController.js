@@ -5,6 +5,7 @@ const data = require("./TEST_DATA"); //comment out after
 const cheerio = require("cheerio");
 
 searchController.getBuisnesses = async (req, res, next) => {
+  console.log(req.query);
   // sdk.auth(
   //   "bearer kuSk_q8ezMZRJiL98mubw4hYgERgyGZ39hSckuAAt6LGvQCV4P-eogXsM2Eolw07rDxCRxJFxYRyI2vc_UeKhkQj3_VAHIEN755YV6Va476d6bQcfkMLVc9bNE9xZHYx"
   // );

@@ -16,12 +16,11 @@ export default function Navbar() {
       radius,
     };
 
-    fetch("/api/search", {
+    fetch("/api/search?" + new URLSearchParams(formData), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((data) => {
