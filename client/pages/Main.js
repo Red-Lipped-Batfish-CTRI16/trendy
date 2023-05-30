@@ -4,27 +4,11 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function Main() {
-  let location = useLocation();
-  const { responseData, userData } = location.state;
-  const [cards, setCards] = useState([]); // Use state to store the cards
+  const formData = useLocation().state;
 
-  useEffect(() => {
-    const cardElements = responseData.map((card, index) => (
-      <div key={index} className="card">
-        <h1>{card.name}</h1>
-        <img src={card.image_url} />
-        <p>Score: {Math.round(card.averageScore * 100)}/100</p>
-        <p>
-          Category:{" "}
-          {card.categories.map((category) => category.title).join(", ")}
-        </p>
-        <p>Address: {card.location.join(", ")}</p>
-        <p>{truncateLink(card.url)}</p>
-      </div>
-    ));
+  const [cardsData, setcardsData] = useState([]); // Use state to store the cards
 
-    setCards(cardElements); // Update the state with the generated cards
-  }, [responseData]);
+  const [isLoading, setIsLoading] = useState("");
 
   const truncateLink = (url) => {
     const maxLength = 40; // Maximum length of the displayed link
@@ -33,11 +17,58 @@ export default function Main() {
     }
     return url;
   };
+  useEffect(() => {
+    setIsLoading(true);
+    fetch("/api/search?" + new URLSearchParams({ ...formData }), {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setcardsData([...data]);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, [formData]);
+
+  const cardElements = cardsData.map((card, index) => (
+    <div key={index} className="card">
+      <h1>{card.name}</h1>
+      <img src={card.image_url} />
+      <p>Score: {Math.round(card.averageScore * 100)}/100</p>
+      <p>
+        Category: {card.categories.map((category) => category.title).join(", ")}
+      </p>
+      <p>Address: {card.location.join(", ")}</p>
+      <p>{truncateLink(card.url)}</p>
+    </div>
+  ));
 
   return (
     <div>
       <h1>Main</h1>
-      <div className="cardDisplay">{cards}</div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="cardDisplay">{cardElements}</div>
+      )}
     </div>
   );
 }
+
+// return (
+//   <>
+//     {image ? (
+//       <img src={image} className="poster" />
+//       ) : (
+//       <p>Loading...</p>
+//       )}
+//     </>
+// )
+// }
+
+// export default BlurredPoster;

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [location, setLocation] = useState("");
   const [interest, setInterest] = useState("");
-  const [radius, setRadius] = useState("");
+  const [radius, setRadius] = useState("8050");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -15,20 +15,7 @@ export default function Navbar() {
       interest,
       radius,
     };
-
-    fetch("/api/search?" + new URLSearchParams(formData), {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        navigate("/main", { state: { responseData: data } });
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    navigate("/main", { state: { ...formData } });
   };
 
   const handleLocationChange = (event) => {
