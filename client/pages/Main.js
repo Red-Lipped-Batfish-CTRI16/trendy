@@ -27,14 +27,14 @@ export default function Main() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setcardsData([...data]);
+        setcardsData(data.sort((a, b) => b.averageScore - a.averageScore));
         setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   }, [formData]);
-  
+
   // const cardElements = cardsData.map((card, index) => (
   //   <div key={index} className="card">
   //     <h1>{card.name}</h1>
@@ -50,15 +50,11 @@ export default function Main() {
 
   return (
     <div>
-      
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <Carousel
-          data={cardsData}
-        >
-          
-        {/* <div className="cardDisplay">{cardElements}</div> */}
+        <Carousel data={cardsData}>
+          {/* <div className="cardDisplay">{cardElements}</div> */}
         </Carousel>
       )}
     </div>

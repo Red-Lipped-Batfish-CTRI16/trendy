@@ -1,14 +1,14 @@
-const jwt = require('jsonwebtoken');
-const express = require('express');
-const db = require('../models/database.js');
+const jwt = require("jsonwebtoken");
+const express = require("express");
+const db = require("../models/database.js");
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
-router.post('/', (req, res, next) => {
+router.post("/", (req, res, next) => {
   try {
     const { username, password } = req.body;
     const values = [username];
-    const getUser = 'SELECT password FROM users WHERE username = $1';
+    const getUser = "SELECT password FROM users WHERE username = $1";
     db.query(getUser, values)
       .then((user) => {
         bcrypt
@@ -19,10 +19,10 @@ router.post('/', (req, res, next) => {
                 { username },
                 process.env.ACCESS_TOKEN_SECRET
               );
-              res.cookie('accessToken', accessToken, {
+              res.cookie("accessToken", accessToken, {
                 httpOnly: true,
               });
-              res.sendStatus(200);
+              res.json(accessToken);
             } else {
               res.sendStatus(401);
             }
