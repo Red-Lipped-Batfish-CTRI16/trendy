@@ -5,9 +5,7 @@ const sdk = require("api")("@yelp-developers/v1.0#deudoolf6o9f51");
 const cheerio = require("cheerio");
 
 searchController.getBuisnesses = async (req, res, next) => {
-  sdk.auth(
-    "bearer kuSk_q8ezMZRJiL98mubw4hYgERgyGZ39hSckuAAt6LGvQCV4P-eogXsM2Eolw07rDxCRxJFxYRyI2vc_UeKhkQj3_VAHIEN755YV6Va476d6bQcfkMLVc9bNE9xZHYx"
-  );
+  sdk.auth("bearer " + process.env.YELP_API);
 
   const { interest, radius } = req.query;
   const location = req.query.location.replace(/\s/g, "%20");
@@ -63,7 +61,7 @@ async function getRatingsHelper(business) {
           "https://api.api-ninjas.com/v1/sentiment?text=" + comment,
           {
             headers: {
-              "X-Api-Key": "MofWezqyBu8SjjAHqQVkXw==tBwSkmuPFMyyhNr8",
+              "X-Api-Key": process.env.ninja_API,
             },
           }
         );
