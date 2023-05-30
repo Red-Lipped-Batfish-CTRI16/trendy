@@ -9,6 +9,8 @@ import Navbar from './components/Navbar'
 import Root from './pages/Root'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Signup from './pages/Signup'
+
 
 
 const router = createBrowserRouter([
@@ -18,7 +20,8 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/main", element: <Main />},
-      { path: "/login", element: <Login />}
+      { path: "/login", element: <Login />},
+      { path: "/signup", element: <Signup />}
     ],
   },
 ]);
