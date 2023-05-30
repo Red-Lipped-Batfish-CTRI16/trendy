@@ -2,6 +2,7 @@ require('dotenv').config();
 /* eslint no-unused-vars: 0 */
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const signupRouter = require('./routes/signup');
 const loginRouter = require('./routes/login');
 const searchRouter = require('./routes/search');
@@ -16,6 +17,7 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('client'));
+app.use(cookieParser());
 
 app.use('/api/search', searchRouter);
 app.use('/api/user', userRouter);

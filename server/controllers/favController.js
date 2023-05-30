@@ -35,4 +35,19 @@ favController.addFav = (req, res, next) => {
   }
 };
 
+favController.removeFav = (req, res, next) => {
+  try {
+    const { user_id, username, business_id } = req.body;
+    const values = [user_id, username, business_id];
+    const removeFav = `DELETE FROM favorites WHERE user_id = $1 AND username = $2 AND business_id = $3`;
+    db.query(removeFav, values).then((fav) => {
+      console.log(fav);
+      res.locals.fav = fav;
+      return next();
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = favController;
