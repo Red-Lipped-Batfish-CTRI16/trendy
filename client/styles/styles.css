@@ -7,3 +7,31 @@
 .Main {
   margin-top: 50px;
 }
+
+.cardDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: black solid 1px;
+  border-radius: 5px;
+  margin: 5px;
+  padding-left: 15px;
+  flex-basis: calc(25% - 10px); /* Adjust the percentage as needed */
+}
+
+.card img {
+  height: 200px;
+  width: 300px;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

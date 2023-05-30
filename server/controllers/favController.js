@@ -22,9 +22,9 @@ WHERE f.user_id = $1`;
 
 favController.addFav = (req, res, next) => {
   try {
-    const { user_id, business_id } = req.body;
-    const values = [user_id, business_id];
-    const addFav = `INSERT INTO favorites (user_id, business_id) VALUES ($1, $2)`;
+    const { user_id, username, business_id } = req.body;
+    const values = [user_id, username, business_id];
+    const addFav = `INSERT INTO favorites (user_id, username, business_id) VALUES ($1, $2, $3)`;
     db.query(addFav, values).then((fav) => {
       console.log(fav);
       res.locals.fav = fav;
