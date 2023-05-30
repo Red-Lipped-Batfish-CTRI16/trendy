@@ -8,7 +8,7 @@ export default function Main() {
 
   const [cardsData, setcardsData] = useState([]); // Use state to store the cards
 
-  const [isLoading, setIsLoading] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const truncateLink = (url) => {
     const maxLength = 40; // Maximum length of the displayed link
