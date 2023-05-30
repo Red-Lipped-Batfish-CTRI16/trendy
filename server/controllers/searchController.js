@@ -1,8 +1,8 @@
 const searchController = {};
-const sdk = require("api")("@yelp-developers/v1.0#deudoolf6o9f51");
+const sdk = require('api')('@yelp-developers/v1.0#deudoolf6o9f51');
 // process.env.YELP_API;
-const data = require("./TEST_DATA"); //comment out after
-const cheerio = require("cheerio");
+const data = require('./TEST_DATA'); //comment out after
+const cheerio = require('cheerio');
 
 searchController.getBuisnesses = async (req, res, next) => {
   // sdk.auth(
@@ -59,10 +59,10 @@ async function getRatingsHelper(business) {
     const data = await Promise.all(
       business.comments.map((comment) => {
         return fetch(
-          "https://api.api-ninjas.com/v1/sentiment?text=" + comment,
+          'https://api.api-ninjas.com/v1/sentiment?text=' + comment,
           {
             headers: {
-              "X-Api-Key": "MofWezqyBu8SjjAHqQVkXw==tBwSkmuPFMyyhNr8",
+              'X-Api-Key': 'MofWezqyBu8SjjAHqQVkXw==tBwSkmuPFMyyhNr8',
             },
           }
         );
@@ -80,7 +80,7 @@ async function getRatingsHelper(business) {
       }, 0) / validResponses;
     return Promise.resolve(avg);
   } catch (error) {
-    return Promise.resolve("ERROR");
+    return Promise.resolve('ERROR');
   }
 }
 

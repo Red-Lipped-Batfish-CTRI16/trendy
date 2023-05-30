@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  const [username, setUsername] = useState("");
-  const [location, setLocation] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false); // Track if signup button was clicked
   const navigate = useNavigate();
 
@@ -11,34 +11,34 @@ export default function Login() {
     event.preventDefault();
 
     if (isSignUp) {
-      fetch("/api/user", {
-        method: "POST",
+      fetch('/api/login', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, location }),
+        body: JSON.stringify({ username, password: password }),
       })
         .then((response) => response.json())
         .then((userData) => {
-          navigate("/", { state: { user: userData } });
+          navigate('/', { state: { user: userData } });
         })
         .catch((error) => {
-          console.error("Error:", error);
+          console.error('Error:', error);
         });
     } else {
-      fetch("/api/user", {
-        method: "GET",
+      fetch('/api/signup', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, location }),
+        body: JSON.stringify({ username, password: password }),
       })
         .then((response) => response.json())
         .then((userData) => {
-          navigate("/", { state: { user: userData } });
+          navigate('/', { state: { user: userData } });
         })
         .catch((error) => {
-          console.error("Error:", error);
+          console.error('Error:', error);
         });
     }
   };
@@ -47,8 +47,8 @@ export default function Login() {
     setUsername(event.target.value);
   };
 
-  const handleLocationChange = (event) => {
-    setLocation(event.target.value);
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   return (
@@ -62,9 +62,10 @@ export default function Login() {
           required
         />
         <input
-          value={location}
-          onChange={handleLocationChange}
-          placeholder="location"
+          value={password}
+          type="password"
+          onChange={handlePasswordChange}
+          placeholder="password"
           required
         />
         <button
@@ -83,10 +84,3 @@ export default function Login() {
     </div>
   );
 }
-
-
-
-
-
-
-
