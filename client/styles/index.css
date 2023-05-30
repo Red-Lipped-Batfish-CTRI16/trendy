@@ -1,7 +1,6 @@
 body {
   font-family: 'Open Sans', sans-serif;
-  background-color: black;
-  color: white;
+  
 }
 
 /* .Main .main-image img { */
@@ -41,6 +40,8 @@ h3 {
   flex-direction: column;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+  background-color: black;
+  margin-top: 50px;
 }
 
 .slick-slider {

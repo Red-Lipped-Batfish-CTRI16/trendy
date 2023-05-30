@@ -35,18 +35,18 @@ export default function Main() {
       });
   }, [formData]);
   
-  const cardElements = cardsData.map((card, index) => (
-    <div key={index} className="card">
-      <h1>{card.name}</h1>
-      <img src={card.image_url} />
-      <p>Score: {Math.round(card.averageScore * 100)}/100</p>
-      <p>
-        Category: {card.categories.map((category) => category.title).join(", ")}
-      </p>
-      <p>Address: {card.location.join(", ")}</p>
-      <p>{truncateLink(card.url)}</p>
-    </div>
-  ));
+  // const cardElements = cardsData.map((card, index) => (
+  //   <div key={index} className="card">
+  //     <h1>{card.name}</h1>
+  //     <img src={card.image_url} />
+  //     <p>Score: {Math.round(card.averageScore * 100)}/100</p>
+  //     <p>
+  //       Category: {card.categories.map((category) => category.title).join(", ")}
+  //     </p>
+  //     <p>Address: {card.location.join(", ")}</p>
+  //     <p>{truncateLink(card.url)}</p>
+  //   </div>
+  // ));
 
   return (
     <div>
@@ -54,8 +54,11 @@ export default function Main() {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <Carousel>
-        <div className="cardDisplay">{cardElements}</div>
+        <Carousel
+          data={cardsData}
+        >
+          
+        {/* <div className="cardDisplay">{cardElements}</div> */}
         </Carousel>
       )}
     </div>

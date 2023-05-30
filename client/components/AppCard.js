@@ -39,8 +39,9 @@ const ShareButton = ({ shareUrl }) => {
 
     // Open social media sharing links in new tabs
     // window.open(socialMediaUrls.facebook, '_blank');
-    window.open(socialMediaUrls.twitter, '_blank');
-    window.open(socialMediaUrls.linkedin, '_blank');
+    // window.open(socialMediaUrls.twitter, '_blank');
+    // window.open(socialMediaUrls.linkedin, '_blank');
+    window.open(shareUrl);
   };
 
   return (
@@ -75,7 +76,7 @@ export default function AppCard(props) {
   return (
     <Card sx={{ maxWidth: 325 }}>
       <CardHeader
-        avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe"></Avatar>}
+        
         action={
           <>
           <IconButton aria-label="settings" onClick={handleMoreVertClick}>
@@ -86,14 +87,13 @@ export default function AppCard(props) {
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={handleMenuClose}>Get distance</MenuItem>
-              <MenuItem onClick={handleMenuClose}>Get more ratings</MenuItem>
+              
               <MenuItem onClick={handleMenuClose}>Save for later</MenuItem>
             </Menu>
           </>
         }
         title={props.title}
-        subheader={props.subheader}
+        subheader={props.score}
       />
       <CardMedia component="img" height="154" image={props.image} alt="Paella dish" />
       <CardContent>
@@ -109,7 +109,7 @@ export default function AppCard(props) {
             <FavoriteBorderIcon />
           )}
         </IconButton>
-        <ShareButton shareUrl="https://www.yelp.com/biz/fog-harbor-fish-house-san-francisco-2?osq=seafood" /> {/* Pass the share URL as a prop */}
+        <ShareButton shareUrl={props.url} /> {/* Pass the share URL as a prop */}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -123,10 +123,10 @@ export default function AppCard(props) {
         <CardContent>
           <Typography paragraph>Info:</Typography>
           <Typography paragraph>
-            Address:
-            Distance:
+            Address: {props.address}
+            
           </Typography>
-          <Typography paragraph>Recent reviews:</Typography>
+         
         </CardContent>
       </Collapse>
     </Card>
