@@ -1,12 +1,10 @@
 import React from "react";
-
-
-import '../client/styles/index.css';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Routes, createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Main from './pages/Main'
-import Navbar from './components/Navbar'
 import Root from './pages/Root'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import '../client/styles/index.css';
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
@@ -27,11 +25,11 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router}>
-   
-
-  </RouterProvider>;
-  
+  return (
+  <RouterProvider 
+    router={router}>
+  </RouterProvider>
+  );
 
 }
 

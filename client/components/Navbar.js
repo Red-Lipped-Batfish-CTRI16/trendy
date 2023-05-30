@@ -33,7 +33,7 @@ export default function Navbar() {
   return (
     <div className="Navbar">
       <div>
-        <h1>TRENDY</h1>
+        
       </div>
       <div>
         <form onSubmit={handleSubmit}>

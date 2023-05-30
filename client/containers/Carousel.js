@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import AppCard from "../components/AppCard"
+import AppCard from "../components/AppCard";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export default class Carousel extends Component {
-  render() {
+export default function Carousel(props){
+  
     const settings = {
       dots: true,
       centerMode: true,
@@ -16,48 +16,46 @@ export default class Carousel extends Component {
       slidesToShow: 3,
       slidesToScroll: 1
     };
+    const truncateLink = (url) => {
+      const maxLength = 40; // Maximum length of the displayed link
+      if (url.length > maxLength) {
+        return url.substring(0, maxLength) + "...";
+      }
+      return url;
+    };
+    const cardsJSX = props.data.map((card, index) => (
+      <div className="cardInCarousel">
+        <AppCard
+          key={index}
+          title={card.name}
+          image={card.image_url}
+          description={card.categories
+            .map((category) => category.title)
+            .join(", ")}
+          address={card.location.join(", ")}
+          score={Math.round(card.averageScore * 100)}
+          url={card.url}
+          
+        />
+      </div>
+      // <div key={index} className="card">
+      //   <h1>{card.name}</h1>
+      //   <img src={card.image_url} />
+      //   <p>Score: {Math.round(card.averageScore * 100)}/100</p>
+      //   <p>
+      //     Category: {card.categories.map((category) => category.title).join(", ")}
+      //   </p>
+      //   <p>Address: {card.location.join(", ")}</p>
+      //   <p>{truncateLink(card.url)}</p>
+      // </div>
+    ));
+    
     return (
-      <div className="carousel">
+      <div className="cardContainer">
         <h2> Results </h2>
         <Slider {...settings}>
-          <div className="cardInCarousel">
-          <AppCard/>
-            <h3>Tacos SF</h3>
-          </div>
-          <div>
-          <AppCard/>
-            <h3>Burger Palace</h3>
-          </div>
-          <div>
-          <AppCard/>
-            <h3>Pizza Legends</h3>
-          </div>
-          <div>
-          <AppCard/>
-            <h3>Sushi House</h3>
-          </div>
-          <div>
-          <AppCard/>
-            <h3>Italian Heaven</h3>
-          </div>
-          <div>
-          <AppCard/>
-            <h3>A great pub</h3>
-          </div>
-          <div>
-          <AppCard/>
-            <h3>Ice cream parlor</h3>
-          </div>
-          <div>
-          <AppCard/>
-            <h3>2nd best bar</h3>
-          </div>
-          <div>
-          <AppCard/>
-            <h3>A very ok bar</h3>
-          </div>
+          {cardsJSX}
         </Slider>
       </div>
     );
   }
-}
