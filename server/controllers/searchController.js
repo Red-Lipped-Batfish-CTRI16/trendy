@@ -9,28 +9,19 @@ searchController.getBuisnesses = async (req, res, next) => {
   //   "bearer kuSk_q8ezMZRJiL98mubw4hYgERgyGZ39hSckuAAt6LGvQCV4P-eogXsM2Eolw07rDxCRxJFxYRyI2vc_UeKhkQj3_VAHIEN755YV6Va476d6bQcfkMLVc9bNE9xZHYx"
   // );
 
-  // const { interest, radius } = req.body;
-  // const location = req.body.location.replace(/\s/g, "%20");
-  // const { data } = await sdk.v3_business_search({
-  //   location,
-  //   term: interest,
-  //   radius,
-  //   sort_by: "best_match",
-  //   limit: "20",
-  // });
+  res.locals.businesses = data.businesses.map((business) => {
+    const { id, name, image_url, url, categories, location } = business;
+    return {
+      id,
+      name,
+      image_url,
+      url,
+      categories,
+      location: location.display_address,
+    };
+  });
 
-  // res.locals.businesses = data.businesses.map((business) => {
-  //   const { id, name, image_url, url, categories, location } = business;
-  //   return {
-  //     id,
-  //     name,
-  //     image_url,
-  //     url,
-  //     categories,
-  //     location: location.display_address,
-  //   };
-  // });
-  res.locals.businesses = data.business;
+  // res.locals.businesses = data.business; // COMMENT THIS OUT AS WELL!@!!!!!
   next();
 };
 
@@ -78,18 +69,18 @@ async function getRatingsHelper(business) {
         }
         return acc;
       }, 0) / validResponses;
-    return Promise.resolve(avg);
+    return Promise.resolve(avg + 30);
   } catch (error) {
     return Promise.resolve('ERROR');
   }
 }
 
 searchController.getRatings = async (req, res, next) => {
-  // const average = await Promise.all(
-  //   res.locals.businesses.map((buisiness) => {
-  //     return getRatingsHelper(buisiness);
-  //   })
-  // );
+  const average = await Promise.all(
+    res.locals.businesses.map((buisiness) => {
+      return getRatingsHelper(buisiness);
+    })
+  );
 
   // const filterBbusinesses = [];
   // for (const index in average) {
