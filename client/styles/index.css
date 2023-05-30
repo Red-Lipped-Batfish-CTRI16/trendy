@@ -4,6 +4,7 @@ body {
   color: white;
 }
 
+/* .Main .main-image img { */
 .Main .main-image img {
   width: 40%;
   margin-left: 450px;
@@ -39,6 +40,10 @@ h3 {
   flex-direction: column;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
+}
+
+.slick-slider {
+  width: 100%;
   background-color: black;
   color: white;
   margin-top: 15px;
@@ -58,4 +63,9 @@ h3 {
 .slick-prev:before,
 .slick-next:before {
     color: white;
+}
+
+.cardInCarousel {
+  color: white;
+  display: grid;
 }

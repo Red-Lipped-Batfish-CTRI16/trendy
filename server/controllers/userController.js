@@ -17,9 +17,9 @@ userController.getUsers = (req, res, next) => {
 
 userController.addUser = (req, res, next) => {
   try {
-    const { username, location } = req.body;
-    const values = [username, location];
-    const insertUser = `INSERT INTO users (username, location) VALUES ($1, $2)`;
+    const { username, password } = req.body;
+    const values = [username, password];
+    const insertUser = `INSERT INTO users (username, password) VALUES ($1, $2)`;
     db.query(insertUser, values).then((user) => {
       console.log(user);
       res.locals.user = user;

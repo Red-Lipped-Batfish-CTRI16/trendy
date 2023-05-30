@@ -2,6 +2,8 @@ require('dotenv').config();
 /* eslint no-unused-vars: 0 */
 const path = require('path');
 const express = require('express');
+const signupRouter = require('./routes/signup');
+const loginRouter = require('./routes/login');
 const searchRouter = require('./routes/search');
 const userRouter = require('./routes/user');
 const businessRouter = require('./routes/business');
@@ -19,6 +21,8 @@ app.use('/api/search', searchRouter);
 app.use('/api/user', userRouter);
 app.use('/api/business', businessRouter);
 app.use('/api/fav', favRouter);
+app.use('/api/signup', signupRouter);
+app.use('/api/login', loginRouter);
 
 app.use(({ code, error }, req, res, next) => {
   res.status(code).json({ error: error.message });
