@@ -69,7 +69,7 @@ async function getRatingsHelper(business) {
         }
         return acc;
       }, 0) / validResponses;
-    return Promise.resolve(avg + 30);
+    return Promise.resolve(+avg + 30);
   } catch (error) {
     return Promise.resolve('ERROR');
   }
