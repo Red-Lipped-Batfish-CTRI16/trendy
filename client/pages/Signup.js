@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login() {
+export default function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('/api/login', {
+    fetch('/api/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +23,8 @@ export default function Login() {
       .catch((error) => {
         console.error('Error:', error);
       });
-  };
+  }
+
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -35,8 +35,8 @@ export default function Login() {
   };
 
   return (
-    <div className="login">
-      <h1>Login</h1>
+    <div className="signup">
+      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <input
           value={username}
@@ -52,13 +52,12 @@ export default function Login() {
           required
         />
         <button
-          type="submit"
-          onClick={handleSubmit} 
-        >
-          Login
+          type="button"
+          onClick={handleSubmit} >
+          Sign up
         </button>
       </form>
-      <button onClick={() => navigate('/signup')}>Sign Up Page</button>
+      <button onClick={() => navigate('/login')}>Login Page</button>
     </div>
   );
 }
