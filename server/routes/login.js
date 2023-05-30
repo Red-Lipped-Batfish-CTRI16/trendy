@@ -19,7 +19,10 @@ router.post('/', (req, res, next) => {
                 { username },
                 process.env.ACCESS_TOKEN_SECRET
               );
-              res.json({ accessToken });
+              res.cookie('accessToken', accessToken, {
+                httpOnly: true,
+              });
+              res.sendStatus(200);
             } else {
               res.sendStatus(401);
             }
