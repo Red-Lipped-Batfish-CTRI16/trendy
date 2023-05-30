@@ -10,4 +10,8 @@ router.post('/', favController.addFav, (req, res, next) => {
   res.json(res.locals.fav);
 });
 
+router.delete('/', favController.removeFav, (req, res, next) => {
+  res.json(res.locals.fav);
+});
+
 module.exports = router;
