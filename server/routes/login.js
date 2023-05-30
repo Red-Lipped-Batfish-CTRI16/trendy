@@ -1,24 +1,41 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
+const db = require('../models/database.js');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
-router.post('/', (req, res) => {
-  const { username, password } = req.body;
-  // TODO: check against DB
-  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-  res.json({ accessToken: accessToken });
+router.post('/', (req, res, next) => {
+  try {
+    const { username, password } = req.body;
+    const values = [username];
+    const getUser = 'SELECT password FROM users WHERE username = $1';
+    db.query(getUser, values)
+      .then((user) => {
+        bcrypt
+          .compare(password, user.rows[0].password)
+          .then((match) => {
+            if (match) {
+              const accessToken = jwt.sign(
+                { username },
+                process.env.ACCESS_TOKEN_SECRET
+              );
+              res.json({ accessToken });
+            } else {
+              res.sendStatus(401);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  } catch (err) {
+    return next(err);
+  }
 });
-
-const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  if (token == null) return res.sendStatus(401);
-
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
-    return next();
-  });
-};
 
 module.exports = router;
