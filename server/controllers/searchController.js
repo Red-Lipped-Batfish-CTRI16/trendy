@@ -79,7 +79,7 @@ async function getRatingsHelper(business) {
         }
         return acc;
       }, 0) / validResponses;
-    return Promise.resolve(+avg + 30);
+    return Promise.resolve(+avg + 0.2);
   } catch (error) {
     return Promise.resolve("ERROR");
   }
@@ -92,14 +92,30 @@ searchController.getRatings = async (req, res, next) => {
     })
   );
 
-  const filterBbusinesses = [];
-  for (const index in average) {
-    if (average[index] !== "ERROR") {
-      res.locals.businesses[index].averageScore = average[index];
-      filterBbusinesses.push(res.locals.businesses[index]);
+  // const filterBbusinesses = [];
+  // for (const index in average) {
+  //   if (average[index] !== "ERROR") {
+  //     res.locals.businesses[index].averageScore = average[index];
+  //     filterBbusinesses.push(res.locals.businesses[index]);
+  //   }
+  // }
+
+  // const filterBbusinessesReducer = average.reduce((acc, curr, index) => {
+  //   if (curr !== "ERROR") {
+  //     res.locals.businesses[index].averageScore = curr;
+  //     acc.push(res.locals.businesses[index]);
+  //   }
+  //   return acc;
+  // }, []);
+
+  // console.log(filterBbusinesses);
+  res.locals.businesses = average.reduce((acc, curr, index) => {
+    if (curr !== "ERROR") {
+      res.locals.businesses[index].averageScore = curr;
+      acc.push(res.locals.businesses[index]);
     }
-  }
-  res.locals.businesses = filterBbusinesses;
+    return acc;
+  }, []);
   next();
 };
 
