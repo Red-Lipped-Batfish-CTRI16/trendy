@@ -34,7 +34,7 @@ export default function Main() {
         console.error("Error:", error);
       });
   }, [formData]);
-
+  
   const cardElements = cardsData.map((card, index) => (
     <div key={index} className="card">
       <h1>{card.name}</h1>
@@ -50,11 +50,13 @@ export default function Main() {
 
   return (
     <div>
-      <h1>Main</h1>
+      
       {isLoading ? (
         <p>Loading...</p>
       ) : (
+        <Carousel>
         <div className="cardDisplay">{cardElements}</div>
+        </Carousel>
       )}
     </div>
   );
