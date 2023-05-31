@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useOutletContext } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorStateMessage, setErrorStateMessage] = useState('');
-
+  const [userName, setUserName] = useOutletContext();
   const navigate = useNavigate();
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -21,6 +22,7 @@ export default function Login() {
       .then(response => {
         // Handle the response data
         console.log(response.data);
+        setUserName(username);
       })
       .catch(error => {
         // Handle any errors
@@ -42,6 +44,7 @@ export default function Login() {
   return (
     <div className="login">
       <h1>Login</h1>
+      
       <span> {errorStateMessage} </span>
       <form onSubmit={handleSubmit}>
         <input
