@@ -1,44 +1,18 @@
 import Carousel from "../containers/Carousel";
-
+import React from 'react';
 
 export default function Saved() {
-  const testData = {
-    averageScore: 0.607181818181818,
-    categories: [
-      {
-        alias:"lounges",
-        title: "Lounges"
-      },
-      {
-        alias: "cocktailbars",
-        title: "Cocktail Bars"
-      }
-    ],
-    comments: [
-      '701 Grant St', 'Denver, CO 80203', '3.2 miles away from Salita', '5.3 miles away from Salita', 'Yelp users haven’t asked any questions yet about Salita.', "Your trust is our top concern, so businesses can't pay to alter or remove their reviews. Learn more.", 'Start your review of Salita.', 'What a great find!! The same bartenders from the g…xt door and the food there is the best in Denver!', 'What an experience!! Very inviting atmosphere from…to visit other Bonnano Concepts, Luca and Mizuna.', "Holy sh*t. That sums up perfectly our experience a…rth it if you're looking to try something unique!", 'The new and currently top of their game living roo… would be suite6A. Live, love, laugh, and cheers!', "Top notch beverages and service. If it's not on th…ar seating and cozy little booths. Will go again!"
-    ],
-    id: "8nkTuIb_L6jVGdhBNaLKmQ",
-    image_url: "https://s3-media2.fl.yelpcdn.com/bphoto/qYkHRlcLfGjTKyjfW-xuaQ/o.jpg",
-    location: ["701 Grant St","Denver, CO 80203"],
-    name: "Salita",
-    url: "https://www.yelp.com/biz/salita-denver?adjust_creative=jwV6sY1jtf2pWAyq1ig0sQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=jwV6sY1jtf2pWAyq1ig0sQ"
-  }
-
+  const testData = [{"id":"DLNc1s9SIOhsCngxvTyqyg","name":"The Street Bar","image_url":"https://s3-media4.fl.yelpcdn.com/bphoto/JTB2l1Xym7V6B5anfEogSg/o.jpg","url":"https://www.yelp.com/biz/the-street-bar-boston?adjust_creative=jwV6sY1jtf2pWAyq1ig0sQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=jwV6sY1jtf2pWAyq1ig0sQ","categories":[{"alias":"bars","title":"Bars"}],"location":["15 Arlington St","Boston, MA 02116"],"comments":["15 Arlington St","Boston, MA 02116","Yelp users haven’t asked any questions yet about The Street Bar.","Your trust is our top concern, so businesses can't pay to alter or remove their reviews. Learn more.","Start your review of The Street Bar.","This place is perfect for you to sit down, relax, and drink. I only had the espresso martini and my friend had other drinks and they were all delicious. The servers come around once in a while to check up so it may take a while to order new items after the initial order but it's perfect to have nice uninterrupted conversations.","Great and friendly service from our Moroccan friend. The espresso martinis were absolutely delicious. And ambience was cool with dim lighting and nice bar area. Great little snacks you get with your drinks too (as pictured).A little pricier than most places though at $22 a pop","Beautiful hotel, beautiful bar but terrible management and communication. My boyfriend and I were entering the bar and a sign read, \"due to capacity we are seating hotel guests only\" when the bar was almost empty. We ended up sitting at the bar and a manger walked over and asked me to move the bag off the chair next to me and to check our coats then he ran away? We ordered the club sandwich with no turkey and shocker, it came with turkey on it. The server was very sweet but we also ordered the caviar and it came with a metal spoon and she said they had one shell spoon that I had to return? Very strange experience. I wouldn't waste your time unless you're desperate for a drink.","Absolutely freaking awesome! Incredible service, ambiance and I seriously do not think I can ever eat scrambled eggs anywhere else than The Street Bar! The best scrambled eggs ever!Great place for a breakfast business meeting!","My new favorite place to drink in Back Bay. So swanky! The best bar snacks! People watching! Worth a visit","What a great place to stop for a drink and the fact they have a food menu is a bonus on top of that.  We stopped in for drinks and this is a cozy atmosphere that takes you back to the days of the library of a great estate where you might sip on a Cognac or Whisky.The servers were attentive and pleasant.  The drinks were nicely made and the server provided some accompaniments to enjoy while having the cocktails.It is a relaxed atmosphere where you want watch the world pass by the windows.  There was a mix of patrons there - some staying at the hotel, some just visiting and also a mix of those getting food or just drinks.Overall, a great place to stop in for a drink and feel like you are stepping back in time a bit.  I look forward to stopping back in again and getting some food as well.","We had lunch on a Saturday, just before noon and were lucky to get a table by the window with a new of the Public Gardens.We started with a cocktail, both were delicious. We split the turkey club with fries, tasty and fresh - the fries were great.It's a great space, so glad they kept the ambiance of the Taj and Four Seasons. It's an older crowd (like us ;-) Service was excellent, friendly and professional. It's not a bargain, but we expected that. We just love it there, we go every time we're in the city","Had a great evening hereThanks to all the staff.Had beers and excellent food.Highly recommend a visit to Street Bar","Five stars for the quality of the build out, four stars for the overall vibe/experience, three stars for food.Lox and bagels were particularly unexceptional--lox was decent (not great) and the bagel, albeit at least toasted, was sub par in both texture and flavor. Other dishes were fine, but not commensurate in flavor/execution/quality with the \"five star\" pricing.Service, while very friendly, was spotty--the restaurant appeared to be short staffed this particular morning.Net, net: hotel quality food in an admittedly VERY nice setting.","Excellent service and atmosphere. Drinks and appetizers also hit the mark. A bit on the expensive side, but definitely a great place for drinks with clients or special occasion."],"averageScore":0.7586000000000002}]
+  console.log(testData);
   return (
     <div className="Saved">
         <h1>Saved</h1>
       <h3>your SAVED data ... </h3>
       under construction
     <div>
-      {/* <Carousel >
-      data=[
-        testData,
-        testData,
-        testData,
-        testData,
-        testData
-      ]
-      </Carousel> */}
+      <Carousel >
+        data={testData}
+      </Carousel>
     </div>
     </div>
 );

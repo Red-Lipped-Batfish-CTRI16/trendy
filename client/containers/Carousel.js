@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 export default function Carousel(props){
-    console.log(props);
+    console.log('carousel props: ', props.data);
     const settings = {
       dots: true,
       centerMode: true,
