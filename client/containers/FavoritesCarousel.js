@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
-import AppCard from "../components/AppCard";
+import FavAppCard from "../components/FavAppCard";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export default function Carousel(props){
+export default function FavoritesCarousel(props){
 
     const settings = {
       dots: true,
@@ -13,16 +13,16 @@ export default function Carousel(props){
       infinite: true,
       centerPadding: "30px",
       speed: 1500,
-      slidesToShow: 3,
-      slidesToScroll: 1
+      rows: 2,
+      slidesPerRow: 2
     };
  
     const cardsJSX = props.data.map((card, index) => {
      console.log(index);
      return <div className="cardInCarousel">
-        <AppCard
+        <FavAppCard
           key={index}
-          favorite={false}
+          favorite={true}
           title={card.name}
           image={card.image_url}
           description={card.categories
