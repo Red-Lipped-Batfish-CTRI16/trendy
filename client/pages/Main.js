@@ -1,6 +1,9 @@
 import Carousel from "../containers/Carousel";
 import AppCard from "../components/AppCard";
 import { useLocation } from "react-router-dom";
+// useLocation Hook: It allows you to access and interact with the current location object in your components.
+// you can retrieve the current location information, including the pathname, search parameters, and hash
+
 import { useEffect, useState } from "react";
 
 export default function Main() {
@@ -10,6 +13,7 @@ export default function Main() {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  // Do we need this??
   const truncateLink = (url) => {
     const maxLength = 40; // Maximum length of the displayed link
     if (url.length > maxLength) {
@@ -17,9 +21,13 @@ export default function Main() {
     }
     return url;
   };
+  
+  
   useEffect(() => {
-    setIsLoading(true);
+    setIsLoading(true); // add loading gif
     fetch("/api/search?" + new URLSearchParams({ ...formData }), {
+      // URLSearchParams: query parameters of a URL. 
+      // It allows you to construct, manipulate, and retrieve query parameters from a URL string or a URL object.
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -35,41 +43,14 @@ export default function Main() {
       });
   }, [formData]);
 
-  // const cardElements = cardsData.map((card, index) => (
-  //   <div key={index} className="card">
-  //     <h1>{card.name}</h1>
-  //     <img src={card.image_url} />
-  //     <p>Score: {Math.round(card.averageScore * 100)}/100</p>
-  //     <p>
-  //       Category: {card.categories.map((category) => category.title).join(", ")}
-  //     </p>
-  //     <p>Address: {card.location.join(", ")}</p>
-  //     <p>{truncateLink(card.url)}</p>
-  //   </div>
-  // ));
+  // what is point of commented code v
+
 
   return (
     <div>
       {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <Carousel data={cardsData}>
-          {/* <div className="cardDisplay">{cardElements}</div> */}
-        </Carousel>
-      )}
+        <p>Loading...</p> // display super fun gif 
+      ) : (<Carousel data={cardsData} />)}
     </div>
   );
 }
-
-// return (
-//   <>
-//     {image ? (
-//       <img src={image} className="poster" />
-//       ) : (
-//       <p>Loading...</p>
-//       )}
-//     </>
-// )
-// }
-
-// export default BlurredPoster;

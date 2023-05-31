@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+// MUI = Material-UI, is a popular open-source user interface (UI) library for building web applications with React.js
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -18,6 +20,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
+
+// Transitions = MUI
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -29,6 +33,10 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+
+
+// encodeURIComponent = built-in JavaScript function that is used to encode a URI component.
+// Used to encode the shareUrl variable before it is appended to the Facebook sharing URL
 const ShareButton = ({ shareUrl }) => {
   const handleShareClick = () => {
     const socialMediaUrls = {

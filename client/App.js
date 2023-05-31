@@ -26,6 +26,7 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
+    // RouterProvider: is the top-level component used in React Router to provide the routing context to its descendants.
   <RouterProvider 
     router={router}>
   </RouterProvider>

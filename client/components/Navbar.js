@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [location, setLocation] = useState("");
   const [interest, setInterest] = useState("");
-  const [radius, setRadius] = useState("8050");
+  const [radius, setRadius] = useState("8050"); // radius takes in meters
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -17,7 +17,9 @@ export default function Navbar() {
     };
     navigate("/main", { state: { ...formData } });
   };
-
+  
+  // turn handle into one function
+  // add name/id attribute to input fields (location, interest, radius)
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
   };
@@ -33,7 +35,7 @@ export default function Navbar() {
   return (
     <div className="Navbar">
       <div>
-        
+        {/** remove empty div? */}
       </div>
       <div>
         <form onSubmit={handleSubmit}>
@@ -51,6 +53,7 @@ export default function Navbar() {
           />
           <label>Radius:</label>
           <select id="radius" value={radius} onChange={handleRadiusChange}>
+            {/*  value in distance in meters. Convert miles into meters? */}
             <option value="8050">5 miles</option>
             <option value="16100">10 miles</option>
             <option value="32200">20 miles</option>
