@@ -37,12 +37,12 @@ describe('add user test', () => {
     
     //WRITES A VALID USER TO THE USER TABLE
 
-    describe('write a valid user to the user table', async () => {
-        const values = ['testing, testing']
+    it('writes a valid user to the user table', async () => {
+        const values = ['testing', 'testing']
         const insertUser = `INSERT INTO users (username, password) VALUES ($1, $2)`
         await db.query(insertUser, values)
         const check = `SELECT * FROM users WHERE username = $1`
-        const result = await db.query(check, [username])
+        const result = await db.query(check, [values[0]])
         console.log(result)
         expect(result).not.toBeInstanceOf(Error)
     })
