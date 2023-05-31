@@ -2,32 +2,26 @@ import Carousel from "../containers/Carousel";
 import AppCard from "../components/AppCard";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
 export default function Main() {
   const formData = useLocation().state;
-
   const [cardsData, setcardsData] = useState([]); // Use state to store the cards
-
   const [isLoading, setIsLoading] = useState(true);
 
-  const truncateLink = (url) => {
-    const maxLength = 40; // Maximum length of the displayed link
-    if (url.length > maxLength) {
-      return url.substring(0, maxLength) + "...";
-    }
-    return url;
-  };
+  
   useEffect(() => {
     setIsLoading(true);
-    fetch("/api/search?" + new URLSearchParams({ ...formData }), {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setcardsData(data.sort((a, b) => b.averageScore - a.averageScore));
+    axios
+      .get("/api/search", {
+        params:{ ...formData },        
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
+      .then((response) => {
+        console.log(response.data); 
+        setcardsData(response.data.sort((a, b) => b.averageScore - a.averageScore));
         setIsLoading(false);
       })
       .catch((error) => {
@@ -35,41 +29,13 @@ export default function Main() {
       });
   }, [formData]);
 
-  // const cardElements = cardsData.map((card, index) => (
-  //   <div key={index} className="card">
-  //     <h1>{card.name}</h1>
-  //     <img src={card.image_url} />
-  //     <p>Score: {Math.round(card.averageScore * 100)}/100</p>
-  //     <p>
-  //       Category: {card.categories.map((category) => category.title).join(", ")}
-  //     </p>
-  //     <p>Address: {card.location.join(", ")}</p>
-  //     <p>{truncateLink(card.url)}</p>
-  //   </div>
-  // ));
-
   return (
     <div>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <Carousel data={cardsData}>
-          {/* <div className="cardDisplay">{cardElements}</div> */}
-        </Carousel>
+        <Carousel data={cardsData}/>
       )}
     </div>
   );
 }
-
-// return (
-//   <>
-//     {image ? (
-//       <img src={image} className="poster" />
-//       ) : (
-//       <p>Loading...</p>
-//       )}
-//     </>
-// )
-// }
-
-// export default BlurredPoster;

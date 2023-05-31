@@ -1,29 +1,36 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useOutletContext } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const [errorStateMessage, setErrorStateMessage] = useState('');
+  const [userName, setUserName] = useOutletContext();
   const navigate = useNavigate();
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password: password }),
-    })
-      .then((response) => response.json())
-      .then((userData) => {
-        navigate('/', { state: { user: userData } });
+    axios
+      .post('/api/login', { username, password }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-      .catch((error) => {
-        console.error('Error:', error);
+      .then(response => {
+        // Handle the response data
+        console.log(response.data);
+        setUserName(username);
+      })
+      .catch(error => {
+        // Handle any errors
+        const { data, ... other} = error.response;
+        console.error('Error:', data.error);
+        setErrorStateMessage('Login failed. Check your username/password.');
       });
+    
   };
 
   const handleUsernameChange = (event) => {
@@ -37,6 +44,8 @@ export default function Login() {
   return (
     <div className="login">
       <h1>Login</h1>
+      
+      <span> {errorStateMessage} </span>
       <form onSubmit={handleSubmit}>
         <input
           value={username}

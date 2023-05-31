@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar() {
+export default function Navbar(props) {
   const [location, setLocation] = useState("");
   const [interest, setInterest] = useState("");
   const [radius, setRadius] = useState("8050");
+  
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -58,9 +59,16 @@ export default function Navbar() {
           <button type="submit">Submit</button>
         </form>
       </div>
+      { props.userName === ''
+      ? 
       <div>
         <button onClick={() => navigate("/login")}>Login or Sign Up</button>
       </div>
+      :
+      <div className="loggedInAs">
+        Logged in as: {props.userName}
+      </div>
+    }
     </div>
   );
 }

@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useOutletContext } from "react-router-dom";
 
 export default function Signup() {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorStateMessage, setErrorStateMessage] = useState('');
+  const [userName, setUserName] = useOutletContext();
+
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('/api/signup', {
-      method: 'POST',
+    axios.post('/api/signup', { username, password }, {
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password: password }),
+        'Content-Type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .then((userData) => {
+      .then(response => {
+        setUserName(username);
+        const userData = response.data;
         navigate('/', { state: { user: userData } });
       })
-      .catch((error) => {
-        console.error('Error:', error);
+      .catch(error => {
+        const { data, ... other} = error.response;
+        console.error('Error:', data.error);
+        setErrorStateMessage(data.error);
       });
   }
 
@@ -37,6 +44,7 @@ export default function Signup() {
   return (
     <div className="signup">
       <h1>Sign Up</h1>
+      <span> {errorStateMessage} </span>
       <form onSubmit={handleSubmit}>
         <input
           value={username}
@@ -58,6 +66,8 @@ export default function Signup() {
         </button>
       </form>
       <button onClick={() => navigate('/login')}>Login Page</button>
+      
+      
     </div>
   );
 }

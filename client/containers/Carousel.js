@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Slider from "react-slick";
 import AppCard from "../components/AppCard";
 import 'slick-carousel/slick/slick.css';
@@ -16,13 +16,7 @@ export default function Carousel(props){
       slidesToShow: 3,
       slidesToScroll: 1
     };
-    const truncateLink = (url) => {
-      const maxLength = 40; // Maximum length of the displayed link
-      if (url.length > maxLength) {
-        return url.substring(0, maxLength) + "...";
-      }
-      return url;
-    };
+ 
     const cardsJSX = props.data.map((card, index) => (
       <div className="cardInCarousel">
         <AppCard
@@ -38,16 +32,7 @@ export default function Carousel(props){
           
         />
       </div>
-      // <div key={index} className="card">
-      //   <h1>{card.name}</h1>
-      //   <img src={card.image_url} />
-      //   <p>Score: {Math.round(card.averageScore * 100)}/100</p>
-      //   <p>
-      //     Category: {card.categories.map((category) => category.title).join(", ")}
-      //   </p>
-      //   <p>Address: {card.location.join(", ")}</p>
-      //   <p>{truncateLink(card.url)}</p>
-      // </div>
+   
     ));
     
     return (
