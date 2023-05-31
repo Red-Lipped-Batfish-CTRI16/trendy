@@ -22,13 +22,13 @@ const db = {
 
 //------------ BEFORE/AFTER TEST FUNCTIONS  ------------//
 
-async function resetDb() {
+ async function resetDb() {
     const string = `DELETE FROM users WHERE user_id > 0`
     await db.query(string)
             
 }
 
-async function addUsers() {
+ async function addUsers() {
     const string = `
     INSERT INTO users (username, password) VALUES
         ('test1', 'test1'),
@@ -44,9 +44,13 @@ async function addUsers() {
 describe('add user tests', () => {
     //refactor async .then and invoking done()
     beforeAll((done) => {
-        resetDb()
+        // resetDb()
         done()
         // done()
+    })
+    afterAll(done => {
+        resetDb()
+        done()
     })
     
     //WRITES A VALID USER TO THE USER TABLE
@@ -60,6 +64,8 @@ describe('add user tests', () => {
         const result = await db.query(check, [values[0]])
         expect(result).not.toBeInstanceOf(Error)
     })
+
+    
 
     //RETURNS AN ERROR WHEN USERNAME ALREADY EXISTS
     //testing db functionality used on line 22 of userController
@@ -81,11 +87,14 @@ describe('add user tests', () => {
 describe('get user tests', () => {
 
     beforeAll(done => {
-        resetDb()
         addUsers()
         done()
     })
 
+    afterAll(done => {
+        // resetDb()
+        done()
+    })
     //GETS ALL USERS FROM DB
     //testing db functionality used on line 7 of userController
 
@@ -98,7 +107,6 @@ describe('get user tests', () => {
     it('the user array contains all previously added users', async () => {
         const string = `SELECT * from users`
         const resp = await db.query(string)
-        console.log(resp.rows)
         let count = 1
         resp.rows.forEach(ele => {
             const result = 'test' + count
@@ -108,6 +116,7 @@ describe('get user tests', () => {
         
     })
 })
+
 
 
 
@@ -158,3 +167,5 @@ describe('get user tests', () => {
 //3. //the testing db user id's are still incrementing based on deleted users ids, which might be a problem
 //4. db user table is 'users'
 //5. db user table schema is '_id, username, password'
+
+module.exports = db
