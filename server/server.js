@@ -25,6 +25,7 @@ app.use('/api/business', businessRouter);
 app.use('/api/fav', favRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/save', saveRouter)
 
 app.use(({ code, error }, req, res, next) => {
   res.status(code).json({ error: error.message });
