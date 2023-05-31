@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 export default function Carousel(props){
-  
+    console.log(props);
     const settings = {
       dots: true,
       centerMode: true,
@@ -17,8 +17,9 @@ export default function Carousel(props){
       slidesToScroll: 1
     };
  
-    const cardsJSX = props.data.map((card, index) => (
-      <div className="cardInCarousel">
+    const cardsJSX = props.data.map((card, index) => {
+     console.log(index);
+     return <div className="cardInCarousel">
         <AppCard
           key={index}
           title={card.name}
@@ -31,9 +32,9 @@ export default function Carousel(props){
           url={card.url}
           
         />
-      </div>
+      </div>}
    
-    ));
+    );
     
     return (
       <div className="cardContainer">

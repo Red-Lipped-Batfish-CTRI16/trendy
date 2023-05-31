@@ -8,6 +8,7 @@ router.get(
   searchController.getComments,
   searchController.getRatings,
   (req, res, next) => {
+    console.log(JSON(res.locals.businesses));
     res.json(res.locals.businesses);
   }
 );
