@@ -12,6 +12,8 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
+
+
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
@@ -19,6 +21,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+
+// Refactor imports into combined import statement like below:
+  // import { Card, CardHeader } from '@mui/material';
 
 
 // Transitions = MUI
@@ -83,6 +88,8 @@ export default function AppCard(props) {
 
   return (
     <Card sx={{ maxWidth: 325 }}>
+      {/* sx prop overrides/defines additional styling */}
+      
       <CardHeader
         
         action={

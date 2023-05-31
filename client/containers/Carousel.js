@@ -15,7 +15,7 @@ export default function Carousel(props){
       className: "carousel",
       infinite: true,
       centerPadding: "30px",
-      speed: 1500,
+      speed: 100,
       slidesToShow: 3,
       slidesToScroll: 1
     };
@@ -32,7 +32,7 @@ export default function Carousel(props){
   
     const cardsJSX = props.data.map((card, index) => (
       // div cardInCarousel?
-      <div className="cardInCarousel">
+      <div className="cardInCarousel" key={`card${index}`}>
         <AppCard
           key={index}
           title={card.name}

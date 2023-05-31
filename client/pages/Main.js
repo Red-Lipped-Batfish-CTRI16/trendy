@@ -10,6 +10,7 @@ export default function Main() {
   const formData = useLocation().state;
 
   const [cardsData, setcardsData] = useState([]); // Use state to store the cards
+  // cardsData contains comments
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,7 +23,6 @@ export default function Main() {
     return url;
   };
   
-  
   useEffect(() => {
     setIsLoading(true); // add loading gif
     fetch("/api/search?" + new URLSearchParams({ ...formData }), {
@@ -33,18 +33,18 @@ export default function Main() {
         "Content-Type": "application/json",
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response)
+        return response.json()
+      })
       .then((data) => {
         setcardsData(data.sort((a, b) => b.averageScore - a.averageScore));
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.log(error);
       });
   }, [formData]);
-
-  // what is point of commented code v
-
 
   return (
     <div>
