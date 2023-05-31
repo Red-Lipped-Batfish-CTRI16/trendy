@@ -1,31 +1,32 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
   
   const navigate = useNavigate();
   
   const [userName, setUserName] = useState(props.userName);
-  console.log('Navbar rendered');
-  
+  console.log('Navbar')
   return (
     <div className="Navbar">
       <div>
-        <a href={`/home`}>
-        Home
-        </a>
+      <Link to={'/home'}>
+        TrendySearch 
+      </Link>
       </div>
       
       <div>
-        <a href={`/favorites`}>
-        Favorites
-        </a>
+        
+      <Link to={'/favorites'}>
+        Favorites 
+      </Link>
       </div>
       
       <div>
-        <a href={`/saved`}>
-        Saved
-        </a>
+      <Link to={'/saved'}>
+        Saved 
+      </Link>
       </div>
       
       { props.userName === ''
