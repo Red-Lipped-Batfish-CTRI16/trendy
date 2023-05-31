@@ -1,0 +1,29 @@
+const db = require("../models/databse2.js");
+
+const saveController = {};
+
+saveController.getSaved = async (req, res, next) => {
+  const allSaves = `SELECT * FROM savedlist`;
+  try {
+    const response = await db.query(allSaves);
+    //send the necessary response back 
+    next();
+  } catch (error) {
+    console.log("error in getSaves controller");
+    return next({ error });
+  }
+};
+
+saveController.addSaved = async(req, res, next) => {
+    { title, description, address, score, url} = req.body;
+  try {
+    const postSaved = `INSERT INTO savedlist (title, description, address, score, url)
+    VALUES(title, description, address, score, url)`;
+    const response = await db.query(postSaved)
+    next();
+  } catch (error) {
+    console.log("error in addSaves controller");
+  }
+};
+
+module.exports = saveController;
