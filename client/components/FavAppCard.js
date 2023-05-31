@@ -51,9 +51,9 @@ const ShareButton = ({ shareUrl }) => {
   );
 };
 
-export default function AppCard(props) {
+export default function FavAppCard(props) {
   const [expanded, setExpanded] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   
   

@@ -1,10 +1,18 @@
-export default function Saved() {
+import Carousel from "../containers/Carousel";
+import React from 'react';
+import saved from '../containers/testData'
 
+export default function Saved() {
+  
   return (
     <div className="Saved">
         <h1>Saved</h1>
-      <h3>your SAVED data ... </h3>
-      under construction
+    <div>
+      <Carousel 
+        data={saved}
+      >
+      </Carousel>
+    </div>
     </div>
 );
 }
