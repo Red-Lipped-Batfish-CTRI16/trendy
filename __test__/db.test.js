@@ -3,7 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const userController = require('../server/controllers/userController')
-const Pool = require('pool')
+const {Pool} = require('pg')
 
 //------------ CONNECT TO TESTING DB ------------//
 
@@ -65,3 +65,7 @@ describe('add user test', () => {
 
 
 // resource: https://betterprogramming.pub/database-testing-made-easy-with-jest-db96ad5f1f46
+
+//notes:
+//1. name this file db.test.js, not db.js, for the jest command to run
+//2. install jest globally, and locally?
