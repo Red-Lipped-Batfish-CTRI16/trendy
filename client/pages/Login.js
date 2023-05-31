@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorStateMessage, setErrorStateMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -23,7 +24,9 @@ export default function Login() {
       })
       .catch(error => {
         // Handle any errors
-        console.error(error);
+        const { data, ... other} = error.response;
+        console.error('Error:', data.error);
+        setErrorStateMessage('Login failed. Check your username/password.');
       });
     
   };
@@ -39,6 +42,7 @@ export default function Login() {
   return (
     <div className="login">
       <h1>Login</h1>
+      <span> {errorStateMessage} </span>
       <form onSubmit={handleSubmit}>
         <input
           value={username}
