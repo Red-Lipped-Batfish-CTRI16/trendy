@@ -42,7 +42,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="signup">
+    <div className="Signup">
       <h1>Sign Up</h1>
       <span> {errorStateMessage} </span>
       <form onSubmit={handleSubmit}>
