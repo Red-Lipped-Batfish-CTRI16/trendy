@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loggedIn, setLoggedIn] = useState(null);
 
   const navigate = useNavigate();
 
@@ -15,14 +16,19 @@ export default function Login() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password: password }),
+      body: JSON.stringify({ username, password }),
     })
       .then((response) => response.json())
       .then((userData) => {
-        navigate('/', { state: { user: userData } });
+        if (userData.status !== 401) {
+          setLoggedIn(true);
+          navigate('/', { state: { user: userData } });
+          // conditionally render thing
+        }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.log(error);
+        setLoggedIn(false);
       });
   };
 
@@ -59,6 +65,7 @@ export default function Login() {
         </button>
       </form>
       <button onClick={() => navigate('/signup')}>Sign Up Page</button>
+      {loggedIn === false ? <p className='error-message'>Invalid login credentials</p> : null}
     </div>
   );
 }
