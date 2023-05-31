@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+// MUI = Material-UI, is a popular open-source user interface (UI) library for building web applications with React.js
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -10,6 +12,8 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
+
+
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
@@ -18,6 +22,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
+// Refactor imports into combined import statement like below:
+  // import { Card, CardHeader } from '@mui/material';
+
+
+// Transitions = MUI
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -29,6 +38,10 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+
+
+// encodeURIComponent = built-in JavaScript function that is used to encode a URI component.
+// Used to encode the shareUrl variable before it is appended to the Facebook sharing URL
 const ShareButton = ({ shareUrl }) => {
   const handleShareClick = () => {
     const socialMediaUrls = {
@@ -75,6 +88,8 @@ export default function AppCard(props) {
 
   return (
     <Card sx={{ maxWidth: 325 }}>
+      {/* sx prop overrides/defines additional styling */}
+      
       <CardHeader
         
         action={

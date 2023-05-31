@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [validSignup, setValidSignup] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -14,14 +15,22 @@ export default function Signup() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password: password }),
+      body: JSON.stringify({ username, password }),
     })
-      .then((response) => response.json())
-      .then((userData) => {
-        navigate('/', { state: { user: userData } });
+      .then((response) => {
+        if (response.status === 409) {
+          setValidSignup(false);
+          return undefined
+        } else {
+          setValidSignup(true);
+          return response.json();
+        }
+      })
+      .then((username) => {  
+        if (username) navigate('/', { state: { user: username } });
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.log(error);
       });
   }
 
@@ -58,6 +67,7 @@ export default function Signup() {
         </button>
       </form>
       <button onClick={() => navigate('/login')}>Login Page</button>
+      {validSignup === false ? <p className='error-message'>Invalid login credentials</p> : null}
     </div>
   );
 }
