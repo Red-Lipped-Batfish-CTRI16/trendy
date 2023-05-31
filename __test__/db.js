@@ -13,8 +13,9 @@ const testPool = new Pool({
     connectionString: testDbURL
 })
 
-const testQuery = {
-    query: (text, params, callback) {
+//this is labelled db because the controllers call it db
+const db = {
+    query: (text, params, callback) => {
         console.log(`test query ${text}`)
         return testPool.query(text, params, callback)
     }
@@ -32,7 +33,15 @@ const testQuery = {
 
 //------------ ADD USER TESTS ------------//
 
-//WRITES A VALID USER TO THE USER TABLE
+describe('add user test', () => {
+    
+    //WRITES A VALID USER TO THE USER TABLE
+
+    describe('write a valid user to the user table', () => {
+        
+    })
+})
+
 
 //RETURNS AN ERROR WHEN USERNAME ALREADY EXISTS
 
