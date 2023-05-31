@@ -24,37 +24,6 @@
   flex-basis: calc(25% - 10px); /* Adjust the percentage as needed */
 }
 
-.card img {
-  height: 200px;
-  width: 300px;
-}
-
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 100px;
-}
-
-.signup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 100px;
-}
-
-.signup span {
-  color: red;
-  margin: 25px;
-}
-
-.login span {
-  color: red;
-  margin: 25px;
-}
-
 .Navbar  {
   background-color: black;
   color: white;
@@ -140,4 +109,70 @@ h3 {
 .cardInCarousel {
   color: white;
   display: grid;
+}
+
+.Home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center;
+  margin-top: 100px;
+  background-color: aquamarine;
+}
+
+
+.Favorites {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center;
+  margin-top: 100px;
+  background-color: purple;
+}
+
+
+.Saved {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center;
+  margin-top: 100px;
+  background-color: yellowgreen;
+}
+
+.Login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+  background-color: mediumslateblue;
+}
+
+.Signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+  background-color: mediumorchid;
+}
+
+.Signup span {
+  background-color: white;
+  color: red;
+  margin: 25px;
+}
+
+.Login span {
+  background-color: white;
+  color: red;
+  margin: 25px;
+}
+
+a {
+  color: white;
 }
