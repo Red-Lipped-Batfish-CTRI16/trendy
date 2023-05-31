@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useOutletContext } from "react-router-dom";
 
 export default function Signup() {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorStateMessage, setErrorStateMessage] = useState('');
+  const [userName, setUserName] = useOutletContext();
 
   const navigate = useNavigate();
 
@@ -19,6 +21,7 @@ export default function Signup() {
       }
     })
       .then(response => {
+        setUserName(username);
         const userData = response.data;
         navigate('/', { state: { user: userData } });
       })
