@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Signup() {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorStateMessage, setErrorStateMessage] = useState('');
+
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -20,7 +23,9 @@ export default function Signup() {
         navigate('/', { state: { user: userData } });
       })
       .catch(error => {
-        console.error('Error:', error);
+        const { data, ... other} = error.response;
+        console.error('Error:', data.error);
+        setErrorStateMessage(data.error);
       });
   }
 
@@ -36,6 +41,7 @@ export default function Signup() {
   return (
     <div className="signup">
       <h1>Sign Up</h1>
+      <span> {errorStateMessage} </span>
       <form onSubmit={handleSubmit}>
         <input
           value={username}
@@ -57,6 +63,8 @@ export default function Signup() {
         </button>
       </form>
       <button onClick={() => navigate('/login')}>Login Page</button>
+      
+      
     </div>
   );
 }
