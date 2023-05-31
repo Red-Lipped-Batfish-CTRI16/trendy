@@ -4,7 +4,12 @@ const db = require('../models/database.js');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-router.post('/', (req, res, next) => {
+// extract passed in username and password from req.body
+// queries and comparies user information
+// if password is a match, provide user w/ access token
+// else send, unauthorized response
+
+router.post("/", (req, res, next) => {
   try {
     const { username, password } = req.body;
     const values = [username];

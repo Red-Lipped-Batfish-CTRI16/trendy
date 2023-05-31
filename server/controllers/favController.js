@@ -2,6 +2,8 @@ const db = require('../models/database.js');
 
 const favController = {};
 
+// getFavs: takes a userID and returns a query of user's favorites w/ Name, Address, and Ratings
+
 favController.getFavs = (req, res, next) => {
   try {
     const { user_id } = req.body;
@@ -20,6 +22,8 @@ WHERE f.user_id = $1`;
   }
 };
 
+// addFav: adds a new business to user's favorite list
+
 favController.addFav = (req, res, next) => {
   try {
     const { user_id, username, business_id } = req.body;
@@ -34,6 +38,8 @@ favController.addFav = (req, res, next) => {
     return next(error);
   }
 };
+
+// removeFav: removes a favorite from user's list
 
 favController.removeFav = (req, res, next) => {
   try {

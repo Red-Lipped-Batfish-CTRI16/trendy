@@ -2,6 +2,8 @@ const db = require('../models/database.js');
 
 const businessController = {};
 
+// addBusinesses: adds bussiness to DB takes Name, Address, and Ratings
+
 businessController.addBusiness = (req, res, next) => {
   try {
     const { name, address, ratings } = req.body;
@@ -16,6 +18,8 @@ businessController.addBusiness = (req, res, next) => {
     return next(error);
   }
 };
+
+// allBusinesses: makes a query for all businesses in DB and returns data
 
 businessController.allBusinesses = (req, res, next) => {
   try {

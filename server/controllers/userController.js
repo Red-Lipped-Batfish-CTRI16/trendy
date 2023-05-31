@@ -2,6 +2,8 @@ const db = require('../models/database.js');
 
 const userController = {};
 
+// getUsers: makes a query for all users in DB and returns data
+
 userController.getUsers = (req, res, next) => {
   try {
     const getUsers = 'SELECT * from users';
@@ -14,6 +16,11 @@ userController.getUsers = (req, res, next) => {
     return next(error);
   }
 };
+
+// addUser: obtains username/password from req.body and uses values to create a search query
+// SQL query for username. if it exists, notify the user
+// else, add user's login to DB
+
 
 userController.addUser = (req, res, next) => {
   try {
