@@ -1,5 +1,4 @@
 import Carousel from "../containers/Carousel";
-import AppCard from "../components/AppCard";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from 'axios';
