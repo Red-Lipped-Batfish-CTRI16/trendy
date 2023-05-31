@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -10,20 +11,21 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password: password }),
-    })
-      .then((response) => response.json())
-      .then((userData) => {
-        navigate('/', { state: { user: userData } });
+    axios
+      .post('/api/login', { username, password }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
-      .catch((error) => {
-        console.error('Error:', error);
+      .then(response => {
+        // Handle the response data
+        console.log(response.data);
+      })
+      .catch(error => {
+        // Handle any errors
+        console.error(error);
       });
+    
   };
 
   const handleUsernameChange = (event) => {

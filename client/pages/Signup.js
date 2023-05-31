@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -9,18 +10,16 @@ export default function Signup() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch('/api/signup', {
-      method: 'POST',
+    axios.post('/api/signup', { username, password }, {
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password: password }),
+        'Content-Type': 'application/json'
+      }
     })
-      .then((response) => response.json())
-      .then((userData) => {
+      .then(response => {
+        const userData = response.data;
         navigate('/', { state: { user: userData } });
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('Error:', error);
       });
   }
