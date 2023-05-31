@@ -28,6 +28,7 @@ export default function Main() {
       .then((response) => response.json())
       .then((data) => {
         setcardsData(data.sort((a, b) => b.averageScore - a.averageScore));
+        console.log(cardsData);
         setIsLoading(false);
       })
       .catch((error) => {

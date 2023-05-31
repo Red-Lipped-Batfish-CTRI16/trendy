@@ -6,8 +6,8 @@ const businessController = {};
 
 businessController.addBusiness = (req, res, next) => {
   try {
-    const { name, address, ratings } = req.body;
-    const values = [name, address, ratings];
+    const { name, address, averageScore } = req.body;
+    const values = [name, address, averageScore];
     const insertBusiness = `INSERT INTO businesses (name, address, ratings) VALUES ($1, $2, $3)`;
     db.query(insertBusiness, values).then((business) => {
       console.log(business);
