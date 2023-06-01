@@ -15,7 +15,7 @@ saveController.getSaved = async (req, res, next) => {
 };
 
 saveController.addSaved = async(req, res, next) => {
-    { title, description, address, score, url} = req.body;
+  const { title, description, address, score, url} = req.body;
   try {
     const postSaved = `INSERT INTO savedlist (title, description, address, score, url)
     VALUES(title, description, address, score, url)`;
