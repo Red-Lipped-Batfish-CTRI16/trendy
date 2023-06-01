@@ -17,7 +17,8 @@ export default function Carousel(props){
       centerPadding: "30px",
       speed: 100,
       slidesToShow: 3,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      // adaptiveHeight: true,
     };
   
     // implement truncateLink or delete

@@ -44,6 +44,8 @@ input {
   margin-top: 50px;
 }
 
+
+
 .slick-slider {
   width: 100%;
   background-color: transparent;
@@ -58,10 +60,6 @@ input {
 
 }
 
-.carousel-container {
-  background-color: aqua;
-}
-
 .slick-prev:before,
 .slick-next:before {
     color: white;
@@ -70,6 +68,11 @@ input {
 .cardInCarousel {
   color: white;
   display: grid;
+  margin-bottom: 50px;
+}
+
+.slick-dots {
+  margin-bottom: 25px;
 }
 
 

@@ -1,10 +1,10 @@
 body {
   background-color: #f5f6f4;
-  height: 100vh;
+  /* height: 100vh; */
 }
-#root {
+/* #root {
   height: 100vh;
-}
+} */
 .Navbar {
   display: flex;
   align-items: center;
@@ -60,10 +60,10 @@ body {
 .main-container {
   background-color: #d3e4d7;
   box-sizing: border-box;
-  height: 50%;
   margin: 5px 20px;
   border-radius: 20px;
   padding: 20px 5px;
+  min-height: 500px;
 }
 
 .error-message {
@@ -97,10 +97,23 @@ body {
   background-color: red;
 }
 
-#root .home {
-  height: 100%;
+.home {
   /* background-image: url("../image/istockphoto-161727733-612x612.jpg"); */
   justify-content: center;
   align-items: center;
-  box-sizing: content-box;
+  display: flex;
+  min-height: 500px;
+}
+
+.loading-message {
+  font-size: 50px;
+  margin: 10px 250px;
+  text-align: center;
+}
+
+.loadingContainer {
+  min-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

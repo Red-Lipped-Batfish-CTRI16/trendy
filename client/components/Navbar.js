@@ -57,13 +57,13 @@ export default function Navbar({displayName, isLoggedIn}) {
               <MenuItem value={ "32200" }>20 Miles</MenuItem>
             </Select>
           </FormControl>
-          <Button type="submit" variant="outlined" sx={{ }} >Submit</Button>
+          <Button type="submit" variant="outlined" sx={{height: 45.75}} >Submit</Button>
         </form>
       </div>
       <div>
         <span>
           {isLoggedIn[0] === true ? (<span>{displayName[0].toUpperCase()} <IconButton aria-label="add to favorites" onClick={() => navigate('/favs')} className="favoriteIcon"><FavoriteIcon /></IconButton> </span>) : null}
-          <Button onClick={handleLoginClick} type="submit" variant="contained" sx={{}} >{ !isLoggedIn[0] ? 'Login' : 'Logout' }</Button>
+          <Button onClick={handleLoginClick} type="submit" variant="contained"  sx={{height: 45.75}}>{ !isLoggedIn[0] ? 'Login' : 'Logout' }</Button>
         </span>
       </div>
     </div>

@@ -122,7 +122,7 @@ export default function AppCard(props) {
         title={props.title}
         subheader={props.score}
       />
-      <CardMedia component="img" height="154" image={props.image} alt="Paella dish" />
+      <CardMedia component="img" height="154" image={props.image} alt="Business Image" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {props.description}

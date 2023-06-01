@@ -1,6 +1,8 @@
 import Carousel from "../containers/Carousel";
 import AppCard from "../components/AppCard";
 import { useLocation } from "react-router-dom";
+import LinearProgress from "@mui/material/LinearProgress";
+
 // useLocation Hook: It allows you to access and interact with the current location object in your components.
 // you can retrieve the current location information, including the pathname, search parameters, and hash
 
@@ -47,10 +49,10 @@ export default function Main() {
   }, [formData]);
 
   return (
-    <div>
+      <>
       {isLoading ? (
-        <p>Loading...</p> // display super fun gif 
-      ) : (<Carousel data={cardsData} />)}
-    </div>
+        <div className="loadingContainer"><p className="loading-message">Loading<LinearProgress /></p> </div> 
+      ) : (<div className="carouselContainer"><Carousel data={cardsData} /></div>)}
+      </>
   );
 }
