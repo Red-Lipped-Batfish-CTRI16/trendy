@@ -10,13 +10,13 @@ export default function Root() {
   console.log(isLoggedIn)
   // let token = localStorage.getItem('jwt')
   // console.log(token)
-  if (!isLoggedIn) {
-    const token = localStorage.getItem('jwt')
-    setLoggedIn(true);
-    const decodedToken = jwt_decode(token)
-    console.log(decodedToken.username)
-    setDisplayName(decodedToken.username)
-  }
+  // if (!isLoggedIn) {
+  //   const token = localStorage.getItem('jwt')
+  //   setLoggedIn(true);
+  //   const decodedToken = jwt_decode(token)
+  //   console.log(decodedToken.username)
+  //   setDisplayName(decodedToken.username)
+  // }
 
   return (
     <>

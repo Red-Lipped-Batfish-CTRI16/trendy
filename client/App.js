@@ -9,7 +9,7 @@ import './styles/index.css';
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-// import Favorites from './pages/Favorites'
+import Favorites from './pages/Favorites'
 
 
 
