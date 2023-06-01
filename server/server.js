@@ -41,6 +41,7 @@ app.use('/api/login', loginRouter);
 
 // Global error handler
 app.use(({ code, error }, req, res, next) => {
+  console.log(error)
   res.status(code).json({ error: error.message });
 });
 

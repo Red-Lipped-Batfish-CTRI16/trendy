@@ -130,4 +130,8 @@ searchController.getRatings = async (req, res, next) => {
   next();
 };
 
+
+
+
+
 module.exports = searchController;

@@ -76,7 +76,7 @@ export default function AppCard(props) {
     setExpanded(!expanded);
     console.log('expanded click');
   };
-
+  // need a post request 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
     console.log(props.id)

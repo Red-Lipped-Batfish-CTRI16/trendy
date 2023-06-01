@@ -10,12 +10,18 @@ import 'slick-carousel/slick/slick-theme.css';
 export default function Carousel(props){
   
     const settings = {
+      arrows: false,
       dots: true,
       centerMode: true,
       className: "carousel",
       infinite: true,
       centerPadding: "30px",
       speed: 100,
+
+      slidesToShow: 5,
+      slidesToScroll: 1,
+      step: 0
+
       slidesToShow: 3,
       slidesToScroll: 1,
       // adaptiveHeight: true,

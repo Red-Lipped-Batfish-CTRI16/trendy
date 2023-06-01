@@ -1,17 +1,25 @@
+const { Await } = require('react-router-dom');
 const db = require('../models/database.js');
 
 const favController = {};
 
 // getFavs: takes a userID and returns a query of user's favorites w/ Name, Address, and Ratings
 
-favController.getFavs = (req, res, next) => {
+favController.getFavs = async (req, res, next) => {
   try {
-    const { user_id } = req.body;
+    const { username } = req.body;
+    const findUserID = `SELECT user_id FROM users WHERE username = ($1);`;
+    let user_id;
+   await db.query(findUserID, [username])
+      .then(id => {
+        user_id = id.rows[0].user_id;
+      });
+      
     const values = [user_id];
-    const getFavs = `SELECT b.name, b.address, b.ratings
-FROM favorites f
-JOIN businesses b ON f.business_id = b.business_id
-WHERE f.user_id = $1`;
+    const getFavs = `SELECT b.name, b.address, b.ratings, b.business_id, b.url, b.image_url, b.categories
+    FROM favorites f
+    JOIN businesses b ON f.business_id = b.business_id
+    WHERE f.user_id = ($1);`;
     db.query(getFavs, values).then((favorites) => {
       console.log(favorites.rows);
       res.locals.favs = favorites.rows;
@@ -24,13 +32,35 @@ WHERE f.user_id = $1`;
 
 // addFav: adds a new business to user's favorite list
 
-favController.addFav = (req, res, next) => {
+favController.addFav = async (req, res, next) => {
   try {
-    const { user_id, username, business_id } = req.body;
-    const values = [user_id, username, business_id];
-    const addFav = `INSERT INTO favorites (user_id, username, business_id) VALUES ($1, $2, $3)`;
+    const { username, api_id } = req.body;
+
+    let user_id, business_id;
+
+
+
+  const findUserID = `SELECT user_id FROM users WHERE username = ($1);`;
+
+   await db.query(findUserID, [username])
+      .then(id => {
+        user_id = id.rows[0].user_id;
+      });
+    
+
+    const findBusinessID = `SELECT business_id FROM businesses WHERE api_id = ($1);`
+
+    await db.query(findBusinessID, [api_id])
+      .then(b_id => {
+        business_id = b_id.rows[0].business_id;
+      });
+      
+    const values = [user_id, business_id];
+
+    const addFav = `INSERT INTO favorites (user_id, business_id) VALUES ($1, $2)`;
+    
     db.query(addFav, values).then((fav) => {
-      console.log(fav);
+      console.log(user_id);
       res.locals.fav = fav;
     });
     return next();
