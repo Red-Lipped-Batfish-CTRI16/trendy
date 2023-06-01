@@ -6,7 +6,7 @@ const cheerio = require("cheerio");
 
 searchController.getBuisnesses = async (req, res, next) => {
   sdk.auth("bearer " + process.env.YELP_API);
-
+  console.log(req.query)
   const { interest, radius } = req.query;
   const location = req.query.location.replace(/\s/g, "%20");
   const { data } = await sdk.v3_business_search({
