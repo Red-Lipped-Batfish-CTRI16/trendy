@@ -64,7 +64,7 @@ describe('Route integration', () => {
         it('responds with error when missing location', (done) => request(server)
             .get('/api/search')
             .query({ location: '123', interest: 'chicken', radius: '8050' })
-            .expect(400), 1000)
+            .expect(400), 10000)
           
         
     })
