@@ -66,7 +66,7 @@ export default function Navbar(props) {
 
       {props.userName === "" ? (
         <div>
-          <button onClick={() => navigate("/login")}>Login or Sign Up</button>
+          <button className = ".navbar-button" onClick={() => navigate("/login")}>Login or Sign Up</button>
         </div>
       ) : (
         <div className="loggedInAs">Logged in as: {props.userName}</div>
