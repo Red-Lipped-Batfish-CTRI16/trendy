@@ -16,7 +16,7 @@ export default function Navbar(props) {
       interest,
       radius,
     };
-    navigate("/main", { state: { ...formData } });
+    navigate("/main", { state: { ...formData, username: props.userName }});
   };
 
   const handleLocationChange = (event) => {

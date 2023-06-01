@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useOutletContext } from "react-router-dom";
 
 export default function Signup() {
-
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorStateMessage, setErrorStateMessage] = useState('');
