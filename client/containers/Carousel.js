@@ -17,9 +17,14 @@ export default function Carousel(props){
       infinite: true,
       centerPadding: "30px",
       speed: 100,
+
       slidesToShow: 5,
       slidesToScroll: 1,
       step: 0
+
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      // adaptiveHeight: true,
     };
   
     // implement truncateLink or delete
@@ -45,6 +50,7 @@ export default function Carousel(props){
           address={card.location.join(", ")}
           score={Math.round(card.averageScore * 100)}
           url={card.url}
+          id={card.id}
         />
       </div>
     ));

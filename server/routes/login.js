@@ -24,7 +24,7 @@ router.post("/", (req, res, next) => {
               res.cookie('accessToken', accessToken, {
                 httpOnly: true,
               });
-              res.json(accessToken);
+              res.json(username);
             } else {
               res.sendStatus(401);
             }
