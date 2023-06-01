@@ -6,9 +6,18 @@ import Navbar from '../components/Navbar'
 
 export default function Root() {
   const [displayName, setDisplayName] = useState('');
-  // const [isLoggedIn, setLoggedIn] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(null);
   console.log(isLoggedIn)
+  // let token = localStorage.getItem('jwt')
+  // console.log(token)
+  if (!isLoggedIn) {
+    const token = localStorage.getItem('jwt')
+    setLoggedIn(true);
+    const decodedToken = jwt_decode(token)
+    console.log(decodedToken.username)
+    setDisplayName(decodedToken.username)
+  }
+
   return (
     <>
       <Navbar displayName={[displayName, setDisplayName]} isLoggedIn={[isLoggedIn, setLoggedIn]} />

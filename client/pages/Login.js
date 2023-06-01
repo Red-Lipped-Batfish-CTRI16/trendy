@@ -21,7 +21,9 @@ export default function Login() {
       .then((response) => response.json())
       .then((userData) => {
         if (userData.status !== 401) {
-          setDisplayName(userData)
+          setDisplayName(userData.username)
+          console.log(userData.accessToken)
+          localStorage.setItem('jwt', userData.accessToken)
           setLoggedIn(true);
           navigate('/', { state: { user: userData } });
         }
