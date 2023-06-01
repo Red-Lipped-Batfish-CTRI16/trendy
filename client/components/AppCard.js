@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useOutletContext } from 'react-router-dom';
 // MUI = Material-UI, is a popular open-source user interface (UI) library for building web applications with React.js
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -25,6 +25,7 @@ import MenuItem from '@mui/material/MenuItem';
 // Refactor imports into combined import statement like below:
   // import { Card, CardHeader } from '@mui/material';
 
+  // send props.address on favorite
 
 // Transitions = MUI
 const ExpandMore = styled((props) => {
@@ -69,6 +70,8 @@ export default function AppCard(props) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const { displayName, setDisplayName, isLoggedIn, setLoggedIn } = useOutletContext();
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
     console.log('expanded click');
@@ -76,6 +79,15 @@ export default function AppCard(props) {
 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
+    console.log(props.id)
+    fetch('/api/fav', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ business: props, username: displayName }),
+      
+    })
   };
 
   const handleMoreVertClick = (event) => {

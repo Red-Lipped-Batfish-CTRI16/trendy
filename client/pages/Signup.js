@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
+  const [usernameTaken, setUsernameTaken] = useState(false);
   const [password, setPassword] = useState('');
-  const [validSignup, setValidSignup] = useState(null);
+  // const [validSignup, setValidSignup] = useState(null);
+  // const [loggedIn, setLoggedIn] = useOutletContext();
+  // const [displayName, setDisplayName] = useOutletContext();
+  const { displayName, setDisplayName, isLoggedIn, setLoggedIn } = useOutletContext();
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -19,15 +25,18 @@ export default function Signup() {
     })
       .then((response) => {
         if (response.status === 409) {
-          setValidSignup(false);
+          
+          setLoggedIn(false);
           return undefined
         } else {
-          setValidSignup(true);
+          setDisplayName(username);
+          setLoggedIn(true)
           return response.json();
         }
       })
       .then((username) => {  
         if (username) navigate('/', { state: { user: username } });
+        else setUsernameTaken(true)
       })
       .catch((error) => {
         console.log(error);
@@ -46,28 +55,13 @@ export default function Signup() {
   return (
     <div className="signup">
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={username}
-          onChange={handleUsernameChange}
-          placeholder="username"
-          required
-        />
-        <input
-          value={password}
-          type="password"
-          onChange={handlePasswordChange}
-          placeholder="password"
-          required
-        />
-        <button
-          type="button"
-          onClick={handleSubmit} >
-          Sign up
-        </button>
+      <form onSubmit={handleSubmit} className='signup-form'>
+        <TextField id="standard-basic" label="Username" variant="standard" onChange={handleUsernameChange} value={username} sx={{marginRight: 1}} required />
+        <TextField id="standard-basic" label="Password" variant="standard" onChange={handlePasswordChange} type='password' sx={{marginRight: 1}} required />
+        <Button type="submit" variant="outlined" sc={{margin: 10}} >Sign Up</Button>
       </form>
-      <button onClick={() => navigate('/login')}>Login Page</button>
-      {validSignup === false ? <p className='error-message'>Invalid login credentials</p> : null}
+      {usernameTaken === true ? <p className='error-message'>{username} is currently taken!</p> : null}
+      <a href='' className='login-redirect' onClick={() => navigate('/login')}>Login Page</a>
     </div>
   );
 }

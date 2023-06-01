@@ -24,7 +24,7 @@ export default function Main() {
   };
   
   useEffect(() => {
-    setIsLoading(true); // add loading gif
+    // setIsLoading(true); // add loading gif
     fetch("/api/search?" + new URLSearchParams({ ...formData }), {
       // URLSearchParams: query parameters of a URL. 
       // It allows you to construct, manipulate, and retrieve query parameters from a URL string or a URL object.

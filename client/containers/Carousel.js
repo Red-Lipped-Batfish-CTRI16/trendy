@@ -43,6 +43,7 @@ export default function Carousel(props){
           address={card.location.join(", ")}
           score={Math.round(card.averageScore * 100)}
           url={card.url}
+          id={card.id}
         />
       </div>
     ));
