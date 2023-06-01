@@ -39,7 +39,6 @@ favController.addFav = async (req, res, next) => {
     let user_id, business_id;
 
 
-
   const findUserID = `SELECT user_id FROM users WHERE username = ($1);`;
 
    await db.query(findUserID, [username])
