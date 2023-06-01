@@ -63,6 +63,8 @@ export default function AppCard(props) {
   const [expanded, setExpanded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  
+  
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

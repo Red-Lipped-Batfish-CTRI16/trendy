@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import AppCard from "../components/AppCard";
 import "slick-carousel/slick/slick.css";
@@ -16,28 +16,29 @@ export default function Carousel(props) {
     slidesToScroll: 1,
   };
 
-  console.log("this is ", props);
-
-  const cardsJSX = props.data.map((card, index) => (
-    <div className="cardInCarousel">
-      <AppCard
-        key={index}
-        title={card.name}
-        image={card.image_url}
-        description={card.categories
-          .map((category) => category.title)
-          .join(", ")}
-        address={card.location.join(", ")}
-        score={Math.round(card.averageScore * 100)}
-        url={card.url}
-        username={props.username}
-      />
-    </div>
-  ));
+  const cardsJSX = props.data.map((card, index) => {
+    console.log(index);
+    return (
+      <div className="cardInCarousel">
+        <AppCard
+          key={index}
+          favorite={false}
+          title={card.name}
+          image={card.image_url}
+          description={card.categories
+            .map((category) => category.title)
+            .join(", ")}
+          address={card.location.join(", ")}
+          score={card.averageScore ? Math.round(card.averageScore * 100) : null}
+          url={card.url}
+          username={props.username}
+        />
+      </div>
+    );
+  });
 
   return (
     <div className="cardContainer">
-      <h2> Results </h2>
       <Slider {...settings}>{cardsJSX}</Slider>
     </div>
   );

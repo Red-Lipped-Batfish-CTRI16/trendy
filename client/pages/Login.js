@@ -23,6 +23,7 @@ export default function Login() {
         // Handle the response data
         console.log(response.data);
         setUserName(username);
+        navigate('/home');
       })
       .catch(error => {
         // Handle any errors
@@ -42,7 +43,7 @@ export default function Login() {
   };
 
   return (
-    <div className="login">
+    <div className="Login">
       <h1>Login</h1>
       
       <span> {errorStateMessage} </span>
