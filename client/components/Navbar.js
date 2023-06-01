@@ -35,20 +35,20 @@ export default function Navbar(props) {
   return (
     <div className="Navbar">
       <div>
-      <Link to={'/home'}>
+      <Link className = "navbar-menu" to={'/home'}>
         TrendySearch 
       </Link>
       </div>
       
       <div>
         
-      <Link to={'/favorites'}>
+      <Link className = "navbar-menu" to={'/favorites'}>
         Favorites 
       </Link>
       </div>
       
       <div>
-      <Link to={'/saved'}>
+      <Link className = "navbar-menu" to={'/saved'}>
         Saved 
       </Link>
       </div>
@@ -56,7 +56,7 @@ export default function Navbar(props) {
       { props.userName === ''
       ? 
       <div>
-        <button onClick={() => navigate("/login")}>Login or Sign Up</button>
+        <button className = "navbar-button" onClick={() => navigate("/login")}>Login or Sign Up</button>
       </div>
       :
       <div className="loggedInAs">
