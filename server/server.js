@@ -9,6 +9,8 @@ const searchRouter = require("./routes/search");
 const userRouter = require("./routes/user");
 const businessRouter = require("./routes/business");
 const favRouter = require("./routes/fav");
+const saveRouter = require("./routes/save");
+
 const app = express();
 const port = 3000;
 
@@ -25,7 +27,7 @@ app.use("/api/business", businessRouter);
 app.use("/api/fav", favRouter);
 app.use("/api/signup", signupRouter);
 app.use("/api/login", loginRouter);
-// app.use('/api/save', saveRouter)
+app.use("/api/save", saveRouter);
 
 app.use(({ code, error }, req, res, next) => {
   res.status(code).json({ error: error.message });

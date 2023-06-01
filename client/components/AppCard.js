@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import React, { useState, useContext } from "react";
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { red } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
+
+// import { useOutletContext } from "react-router-dom";
+// const [userName, setUserName] = useOutletContext();
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
   }),
 }));
@@ -32,9 +36,13 @@ const ExpandMore = styled((props) => {
 const ShareButton = ({ shareUrl }) => {
   const handleShareClick = () => {
     const socialMediaUrls = {
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+        shareUrl
+      )}`,
       twitter: `https://twitter.com/share?url=${encodeURIComponent(shareUrl)}`,
-      linkedin: `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(shareUrl)}`,
+      linkedin: `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
+        shareUrl
+      )}`,
     };
 
     // Open social media sharing links in new tabs
@@ -60,7 +68,7 @@ export default function AppCard(props) {
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
-    console.log('expanded click');
+    console.log("expanded click");
   };
 
   const handleFavoriteClick = () => {
@@ -71,25 +79,40 @@ export default function AppCard(props) {
     setAnchorEl(event.currentTarget);
   };
 
+  // const[userName] = useContext(userNa)
   const handleMenuClose = () => {
     setAnchorEl(null);
+    console.log("proppy mcprops", props);
+    // console.log("contexy context", username);
+    const postData = async () => {
+      try {
+        console.log("were savin");
+        const response = await fetch("/api/save", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(props),
+        });
+      } catch (err) {
+        // console.log("err posting to business");
+        return next(err);
+      }
+    };
+    postData();
   };
 
   return (
     <Card sx={{ maxWidth: 325 }}>
       <CardHeader
-        
         action={
           <>
-          <IconButton aria-label="settings" onClick={handleMoreVertClick}>
-            <MoreVertIcon />
-          </IconButton>
-          <Menu
+            <IconButton aria-label="settings" onClick={handleMoreVertClick}>
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}
             >
-              
               <MenuItem onClick={handleMenuClose}>Save for later</MenuItem>
             </Menu>
           </>
@@ -97,7 +120,12 @@ export default function AppCard(props) {
         title={props.title}
         subheader={props.score}
       />
-      <CardMedia component="img" height="154" image={props.image} alt="Paella dish" />
+      <CardMedia
+        component="img"
+        height="154"
+        image={props.image}
+        alt="Paella dish"
+      />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {props.description}
@@ -111,7 +139,8 @@ export default function AppCard(props) {
             <FavoriteBorderIcon />
           )}
         </IconButton>
-        <ShareButton shareUrl={props.url} /> {/* Pass the share URL as a prop */}
+        <ShareButton shareUrl={props.url} />{" "}
+        {/* Pass the share URL as a prop */}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -124,11 +153,7 @@ export default function AppCard(props) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Info:</Typography>
-          <Typography paragraph>
-            Address: {props.address}
-            
-          </Typography>
-         
+          <Typography paragraph>Address: {props.address}</Typography>
         </CardContent>
       </Collapse>
     </Card>

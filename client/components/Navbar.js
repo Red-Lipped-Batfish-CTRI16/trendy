@@ -5,7 +5,31 @@ import { Link } from "react-router-dom";
 export default function Navbar(props) {
   
   const navigate = useNavigate();
-  
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = {
+      location,
+      interest,
+      radius,
+    };
+    navigate("/main", { state: { ...formData, username: props.userName }});
+  };
+
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
+  };
+
+  const handleInterestChange = (event) => {
+    setInterest(event.target.value);
+  };
+
+  const handleRadiusChange = (event) => {
+    setRadius(event.target.value);
+  };
+
+
   const [userName, setUserName] = useState(props.userName);
   console.log('Navbar')
   return (

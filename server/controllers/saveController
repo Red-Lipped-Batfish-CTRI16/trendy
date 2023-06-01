@@ -1,25 +1,37 @@
-const db = require("../models/databse2.js");
+const db = require("../models/database.js");
 
 const saveController = {};
 
-saveController.getSaved = async (req, res, next) => {
-  const allSaves = `SELECT * FROM savedlist`;
-  try {
-    const response = await db.query(allSaves);
-    //send the necessary response back 
-    next();
-  } catch (error) {
-    console.log("error in getSaves controller");
-    return next({ error });
-  }
-};
+// saveController.getSaved = async (req, res, next) => {
+//   const allSaves = `SELECT * FROM savedlist`;
+//   try {
+//     const response = await db.query(allSaves);
+//     //send the necessary response back
+//     next();
+//   } catch (error) {
+//     console.log("error in getSaves controller");
+//     return next({ error });
+//   }
+// };
 
-saveController.addSaved = async(req, res, next) => {
-  const { title, description, address, score, url} = req.body;
+
+saveController.addSaved = async (req, res, next) => {
+  const { business_id } = res.locals.business;
   try {
-    const postSaved = `INSERT INTO savedlist (title, description, address, score, url)
-    VALUES(title, description, address, score, url)`;
-    const response = await db.query(postSaved)
+    // console.log("this is res.locals", res.locals);
+    // console.log("trying to select");
+    const userQuery = "SELECT user_id FROM users WHERE username = $1";
+    // console.log(res.locals);
+    const userValues = [res.locals.username];
+    // console.log("this is userValues", userValues);
+    const userResponse = await db.query(userQuery, userValues);
+    // console.log(userResponse);
+    // console.log(business_id);
+
+    const postSaved = `INSERT INTO savetable (user_id, business_id)
+    VALUES ($1, $2)`;
+    const postValues = [userResponse.rows[0].user_id, business_id];
+    db.query(postSaved, postValues);
     next();
   } catch (error) {
     console.log("error in addSaves controller");
