@@ -9,15 +9,14 @@ businessController.addBusiness = async (req, res, next) => {
     const { id, url, address, image, title, description, score } = req.body.business;
 
 
-    const test = address[0].concat(" ", address[1])
+    const linkedAddress = address[0].concat(" ", address[1])
 
     
-    let cache = description.map( el => el.title )
-    cache = cache[0].concat(", ", cache[1])
+    let cache = description.map( el => el.title ).join(", ")
     console.log("RIGHT HEREtest cache",cache)
 
 
-    const values = [id, url, test, image, title, cache, score];
+    const values = [id, url, linkedAddress, image, title, cache, score];
 
     const check = 'SELECT * FROM businesses WHERE api_id = $1';
     let exists = false;

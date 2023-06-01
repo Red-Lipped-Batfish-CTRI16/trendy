@@ -20,7 +20,7 @@ export default function Carousel(props){
 
       slidesToShow: 5,
       slidesToScroll: 1,
-      step: 0
+      step: 0,
 
       slidesToShow: 3,
       slidesToScroll: 1,
