@@ -37,7 +37,7 @@ export default function Home() {
     <div className="Home">
         <h1>Search</h1>
       <h3>Input a Location and Interest to View Results</h3>
-      <div>
+      <div className = "search-form">
         <form onSubmit={handleSubmit}>
           <input
             placeholder="Location"
@@ -51,13 +51,18 @@ export default function Home() {
             onChange={handleInterestChange}
             required
           />
+          <div className = "radius">
           <label>Radius:</label>
           <select id="radius" value={radius} onChange={handleRadiusChange}>
-            <option value="8050">5 miles</option>
-            <option value="16100">10 miles</option>
-            <option value="32200">20 miles</option>
-          </select>
+            <option className = "option" value="8050">5 miles</option>
+            <option className = "option" value="16100">10 miles</option>
+            <option className = "option" value="32200">20 miles</option>
+            </select>
+          </div>
+          <div className="button-container">
+            
           <button type="submit">Submit</button>
+          </div>
         </form>
       </div>
       

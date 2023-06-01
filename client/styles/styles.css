@@ -60,7 +60,7 @@
 
 
 
-form {
+form, .search-form {
   margin: 5px;
   padding: 5px;
 }
@@ -108,7 +108,7 @@ h3 {
   flex-direction: column;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
-  background-color: black;
+  background: white;
   margin-top: 10px;
 }
 
@@ -123,6 +123,7 @@ h3 {
 .carousel {
   width: 90%;
   font-family: 'Open Sans', sans-serif;
+  background: white;
 
 }
 
@@ -137,27 +138,24 @@ h3 {
 
 .cardInCarousel {
   color: white;
-  display: grid;
-  margin-bottom: 35px;
-}
-
-.Home {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  text-align: center;
-  margin-top: 100px;
-  background-color: aquamarine;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 35px;
+  background: white;
 }
+.card {
+  border: 1px solid red;
+}
+
+
 
 
 .Favorites {
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   text-align: center;
-  margin: 100px;
-  background-color: rgb(108, 179, 229);
 }
 
 
@@ -169,33 +167,17 @@ h3 {
   background-color: yellowgreen;
 }
 
-.Login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 50px;
-  background-color: mediumslateblue;
-}
 
-.Signup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 50px;
-  background-color: mediumorchid;
-}
+
+
 
 .Signup span {
   background-color: white;
-  color: red;
   margin: 25px;
 }
 
 .Login span {
   background-color: white;
-  color: red;
   margin: 25px;
 }
 
@@ -219,14 +201,17 @@ button:hover {
   transform: scale(1.1)
 }
 
-.Login {
+.Login, .Home, .Signup, .loading{
   background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.Login h1 {
+.Login h1, .Home h1, .Signup h1, .Favorites h1{
   font-size: 7rem;
   margin-bottom: 0;
-
 }
 
 
@@ -236,14 +221,76 @@ button:hover {
 
 }
 
+
+
 .button-container button {
   width: 100%;
 }
 
-input {
+input{
   width: 100%;
   padding: .5rem 1rem;
   margin-top: 1rem;
   text-align: center;
   
+}
+
+.radius  {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  background: white;
+  padding: .5rem 1rem;
+  margin-top: 1rem;
+  border: 1px solid gray;
+  cursor: pointer
+}
+
+h3 {
+  margin: auto
+}
+
+.loading {
+  margin-top: 5rem;
+}
+
+.loading h2 {
+  font-weight: 100;
+  font-size: 5rem;
+}
+
+.outside {
+  width: 22.5rem
+}
+
+.loader {
+  margin: auto;
+  border: 10px solid #EAF0F6;
+  border-radius: 50%;
+  border-top: 10px solid gray;
+  width: 100px;
+  height: 100px;
+  animation: spinner 4s linear infinite;
+}
+
+@keyframes spinner {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg)}
+}
+
+.material-button {
+  box-shadow: 0px 0px 5px black;
+}
+.material-button button {
+  all: revert;
+  background: white;
+  border: none;
+  cursor: pointer;
+  transition: 1s
+}
+
+.material-button button:hover,
+.material-button button:focus {
+  scale: 1.1;
+  background: white;
 }

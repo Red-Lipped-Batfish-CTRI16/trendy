@@ -35,7 +35,10 @@ export default function Main() {
   return (
     <div>
       {isLoading ? (
-        <p>Loading...</p>
+        <div className = "loading">
+          <h2>Loading...</h2>
+          <div className="loader"></div>
+        </div>
       ) : (
         <Carousel username={userName} data={cardsData} />
       )}

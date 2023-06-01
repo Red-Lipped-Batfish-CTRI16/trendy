@@ -13,8 +13,8 @@ export default function FavoritesCarousel(props){
       infinite: true,
       centerPadding: "30px",
       speed: 1500,
-      rows: 2,
-      slidesPerRow: 2
+      rows: 1,
+      slidesPerRow: 3
     };
  
     const cardsJSX = props.data.map((card, index) => {
@@ -40,7 +40,7 @@ export default function FavoritesCarousel(props){
     return (
       <div className="cardContainer">
        
-        <Slider {...settings}>
+        <Slider {...settings} >
           {cardsJSX}
         </Slider>
       </div>
