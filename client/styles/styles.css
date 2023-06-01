@@ -152,21 +152,11 @@ h3 {
 
 
 
-.Favorites {
+.Favorites, .Saved {
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
   text-align: center;
 }
-
-
-.Saved {
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  text-align: center;
-  margin: 100px;
-  background-color: yellowgreen;
-}
-
 
 
 
@@ -214,7 +204,7 @@ button:hover {
   flex-direction: column;
 }
 
-.Login h1, .Home h1, .Signup h1, .Favorites h1{
+.Login h1, .Home h1, .Signup h1, .Favorites h1, .Saved h1{
   font-size: 7rem;
   margin-bottom: 0;
 }
