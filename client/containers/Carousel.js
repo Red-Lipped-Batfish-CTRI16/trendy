@@ -10,7 +10,7 @@ import 'slick-carousel/slick/slick-theme.css';
 export default function Carousel(props){
   
     const settings = {
-      arrows: false,
+      arrows: true,
       dots: true,
       centerMode: true,
       className: "carousel",

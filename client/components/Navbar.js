@@ -35,8 +35,9 @@ export default function Navbar({displayName, isLoggedIn}) {
   const handleLoginClick = () => {
     if (!isLoggedIn[0]) navigate('/login');
     else {
-      isLoggedIn[1](false)
-      navigate('/')
+      isLoggedIn[1](false);
+      localStorage.removeItem('jwt');
+      navigate('/');
 
     }
   }
