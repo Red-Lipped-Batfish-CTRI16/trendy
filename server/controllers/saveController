@@ -2,17 +2,29 @@ const db = require("../models/database.js");
 
 const saveController = {};
 
-// saveController.getSaved = async (req, res, next) => {
-//   const allSaves = `SELECT * FROM savedlist`;
-//   try {
-//     const response = await db.query(allSaves);
-//     //send the necessary response back
-//     next();
-//   } catch (error) {
-//     console.log("error in getSaves controller");
-//     return next({ error });
-//   }
-// };
+saveController.getSaved = async (req, res, next) => {
+  try {
+    const userQuery = "SELECT user_id FROM users WHERE username = $1";
+    const userValues = [req.params.id];
+    // console.log("reqparamschck uservalues", typeof userValues);
+    console.log("reqparamschck paramid", typeof req.params.id);
+
+    const userResponse = await db.query(userQuery, userValues);
+    console.log(userResponse.rows[0]);
+    console.log("sanitycheck", userResponse.rows[0].user_id);
+
+    const allSaves = `SELECT * FROM savetable JOIN businesses ON savetable.business_id = businesses.business_id WHERE user_id = $1`;
+    const values = [userResponse.rows[0].user_id];
+    const response = await db.query(allSaves, values);
+    console.log(response.rows);
+    res.locals.saved = response.rows;
+    //send the necessary response back
+    return next();
+  } catch (error) {
+    console.log("error in getSaves controller");
+    return next(error);
+  }
+};
 
 
 saveController.addSaved = async (req, res, next) => {
