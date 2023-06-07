@@ -47,7 +47,7 @@ favController.addFav = async (req, res, next) => {
     let user_id, business_id;
 
     const findUserID = `SELECT user_id FROM users WHERE username = ($1);`;
-    console.log("AYE IM WALKING HERE!!!!!!!") 
+
     await db.query(findUserID, [username])
         .then(id => {
           user_id = id.rows[0].user_id;
@@ -83,7 +83,6 @@ favController.addFav = async (req, res, next) => {
     const addFav = `INSERT INTO favorites (user_id, business_id) VALUES ($1, $2)`;
     
     db.query(addFav, values).then((fav) => {
-      console.log(user_id);
       res.locals.fav = fav;
 
     });
@@ -121,7 +120,6 @@ favController.removeFav = async (req, res, next) => {
     const removeFav = `DELETE FROM favorites WHERE user_id = $1 AND business_id = $2`;
 
     db.query(removeFav, values).then((fav) => {
-      console.log(fav);
       res.locals.fav = fav;
       return next();
 

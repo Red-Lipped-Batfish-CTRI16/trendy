@@ -10,8 +10,9 @@ searchController.getBuisnesses = async (req, res, next) => {
   sdk.auth("bearer " + process.env.YELP_API);
 
   const { interest, radius } = req.query;
+
   const location = req.query.location.replace(/\s/g, "%20");
-  console.log('--------------------------------', interest, radius, location);
+
   const { data } = await sdk.v3_business_search({
     location,
     term: interest,
@@ -47,10 +48,12 @@ searchController.getBuisnesses = async (req, res, next) => {
 // returns next
 
 searchController.getComments = async (req, res, next) => {
+
   Promise.all(
     res.locals.businesses.map((business) => fetch(business.url))
   ).then((YELPres) => {
     Promise.all(YELPres.map((x) => x.text())).then((html) => {
+
       for (const index in html) {
         const comments = [];
         const $ = cheerio.load(html[index]);
@@ -58,7 +61,9 @@ searchController.getComments = async (req, res, next) => {
         $comment.each((i, element) => {
           comments.push($(element).text().trim());
         });
+
         res.locals.businesses[index].comments = comments;
+
       }
       next();
     });

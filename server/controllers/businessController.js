@@ -55,7 +55,7 @@ businessController.allBusinesses = (req, res, next) => {
       return next();
 
     });
-    
+
   } catch (error) {
     return next(error);
   }
