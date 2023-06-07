@@ -21,7 +21,7 @@
 -- );
 -- INSERT INTO users (username, location)
 -- VALUES ('Peter', 'AZ');
---------------------------------------------------------------------------- After making DB in POSTGRES, pasted this into SQL Browser
+--------------------------------------------------------------------------- After making DB in POSTGRES, paste this into SQL Browser
 -- CREATE TABLE users (
 --   user_id SERIAL PRIMARY KEY,
 --   username VARCHAR(255) NOT NULL,
@@ -29,9 +29,8 @@
 -- );
 -- CREATE TABLE businesses (
 --   business_id SERIAL PRIMARY KEY,
---   name VARCHAR(255),
---   address VARCHAR(255),
---   ratings DECIMAL(4, 3)
+--   api_id VARCHAR(255),
+--   
 -- );
 -- CREATE TABLE favorites (
 --   favorite_id SERIAL PRIMARY KEY,

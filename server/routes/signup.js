@@ -7,9 +7,7 @@ router.post(
   '/',
   passwordController.hashPassword,
   userController.addUser,
-  (req, res, next) => {
-    res.json(res.locals.user);
-  }
+  (req, res) => res.status(201).json(res.locals.user),
 );
 
 module.exports = router;
