@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
+// MUI = Material-UI, is a popular open-source user interface (UI) library for building web applications with React.js
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -10,6 +12,8 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
+
+
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
@@ -18,6 +22,12 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
+// Refactor imports into combined import statement like below:
+  // import { Card, CardHeader } from '@mui/material';
+
+  // send props.address on favorite
+
+// Transitions = MUI
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -29,6 +39,10 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+
+
+// encodeURIComponent = built-in JavaScript function that is used to encode a URI component.
+// Used to encode the shareUrl variable before it is appended to the Facebook sharing URL
 const ShareButton = ({ shareUrl }) => {
   const handleShareClick = () => {
     const socialMediaUrls = {
@@ -56,13 +70,24 @@ export default function AppCard(props) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const { displayName, setDisplayName, isLoggedIn, setLoggedIn } = useOutletContext();
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
     console.log('expanded click');
   };
-
+  // need a post request 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
+    console.log(props.id)
+    fetch('/api/fav', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ business: props, username: displayName }),
+      
+    })
   };
 
   const handleMoreVertClick = (event) => {
@@ -75,6 +100,8 @@ export default function AppCard(props) {
 
   return (
     <Card sx={{ maxWidth: 325 }}>
+      {/* sx prop overrides/defines additional styling */}
+      
       <CardHeader
         
         action={
@@ -95,7 +122,7 @@ export default function AppCard(props) {
         title={props.title}
         subheader={props.score}
       />
-      <CardMedia component="img" height="154" image={props.image} alt="Paella dish" />
+      <CardMedia component="img" height="154" image={props.image} alt="Business Image" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {props.description}

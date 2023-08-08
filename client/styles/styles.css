@@ -1,8 +1,29 @@
+body {
+  background-color: #f5f6f4;
+  /* height: 100vh; */
+}
+/* #root {
+  height: 100vh;
+} */
 .Navbar {
   display: flex;
   align-items: center;
-  justify-content:space-evenly;
+  justify-content: space-between;
+  margin: 2px 40px;
 }
+
+ @media only screen and (max-width: 900px) {
+  .Navbar {
+    flex-wrap: wrap;
+  }
+
+  #standard-basic2 {
+    width: 100px;
+  }
+   #standard-basic3 {
+    width: 100px;
+  }
+ }
 
 .Main {
   margin-top: 50px;
@@ -29,18 +50,70 @@
   width: 300px;
 }
 
-.login {
+.login, .signup {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 100px;
 }
 
-.signup {
+.main-container {
+  background-color: #d3e4d7;
+  box-sizing: border-box;
+  margin: 5px 20px;
+  border-radius: 20px;
+  padding: 20px 5px;
+  min-height: 500px;
+}
+
+.error-message {
+  font-size: 13px;
+  font-style: italic;
+  color: darkred;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.login-form, .signup-form, .navbar-submit {
+  display: flex;
+  align-items: center;
+}
+
+.login-redirect, .signup-redirect {
+  padding: 10px;
+}
+
+
+.favoriteIcon:hover {
+  color: red;
+}
+
+.signup-redirect {
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.App {
+  background-color: red;
+}
+
+.home {
+  /* background-image: url("../image/istockphoto-161727733-612x612.jpg"); */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  min-height: 500px;
+}
+
+.loading-message {
+  font-size: 50px;
+  margin: 10px 250px;
+  text-align: center;
+}
+
+.loadingContainer {
+  min-height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  margin-top: 100px;
 }

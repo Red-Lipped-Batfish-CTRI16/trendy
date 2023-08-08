@@ -4,11 +4,15 @@ const sdk = require("api")("@yelp-developers/v1.0#deudoolf6o9f51");
 // const data = require("./TEST_DATA"); //comment out after
 const cheerio = require("cheerio");
 
+// getBuisnesses: Authenticates Yelp API, searches with v3_business_search from Yelp, assigns businesses to an array of objects in local storage
+
 searchController.getBuisnesses = async (req, res, next) => {
   sdk.auth("bearer " + process.env.YELP_API);
 
   const { interest, radius } = req.query;
+
   const location = req.query.location.replace(/\s/g, "%20");
+
   const { data } = await sdk.v3_business_search({
     location,
     term: interest,
@@ -33,19 +37,33 @@ searchController.getBuisnesses = async (req, res, next) => {
   next();
 };
 
+// getComments: creates array of buines objects
+// fetch request on each objects's url
+// get all html from provided url stored as array
+// iterate through html array 
+  // web scrape for comments 
+  // push comments into array 
+  // add comment array as a property to object
+
+// returns next
+
 searchController.getComments = async (req, res, next) => {
+
   Promise.all(
     res.locals.businesses.map((business) => fetch(business.url))
   ).then((YELPres) => {
     Promise.all(YELPres.map((x) => x.text())).then((html) => {
+
       for (const index in html) {
         const comments = [];
         const $ = cheerio.load(html[index]);
         const $comment = $("span.raw__09f24__T4Ezm");
-        $comment.each((i, e) => {
-          comments.push($(e).text().trim());
+        $comment.each((i, element) => {
+          comments.push($(element).text().trim());
         });
+
         res.locals.businesses[index].comments = comments;
+
       }
       next();
     });
@@ -116,5 +134,9 @@ searchController.getRatings = async (req, res, next) => {
   }, []);
   next();
 };
+
+
+
+
 
 module.exports = searchController;
